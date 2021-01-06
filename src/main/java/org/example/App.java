@@ -11,6 +11,8 @@ public class App {
     public static void main(String[] args) {
         initialize();
 
+        new Mandelbrot().setVisible(true);
+
         Spark.get("/", (req, res) -> {
             return Template.render("home.html", new HashMap<>());
         });

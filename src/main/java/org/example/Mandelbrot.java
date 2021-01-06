@@ -45,7 +45,7 @@ public class Mandelbrot extends JFrame {
     public void saveFileAsJng(BufferedImage bufferedImage) {
         try {
             BufferedImage bi = bufferedImage;
-            File outputFile = new File("fractal.jpg");
+            File outputFile = new File("src/main/resources/static/img/mandelbro.jpg");
             ImageIO.write(bi, "jpg", outputFile);
         } catch (Exception e) {
             e.printStackTrace();
