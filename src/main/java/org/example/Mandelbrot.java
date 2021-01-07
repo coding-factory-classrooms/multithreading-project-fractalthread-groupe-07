@@ -36,7 +36,6 @@ public class Mandelbrot extends JFrame {
             }
         }
         invertBlackAndWhite(I);
-        saveFileAsJng(I);
     }
 
     public void generateMandelbrot() {
@@ -48,7 +47,7 @@ public class Mandelbrot extends JFrame {
         g.drawImage(I, 0, 0, this);
     }
 
-    public void saveFileAsJng(BufferedImage bufferedImage) {
+    public void saveFileAsJpg(BufferedImage bufferedImage) {
         try {
             BufferedImage bi = bufferedImage;
             File outputFile = new File("src/main/resources/static/img/mandelbrot.jpg");
@@ -92,7 +91,8 @@ public class Mandelbrot extends JFrame {
     public static void main(String[] args) {
 //        for (int i = 0; i < 10; i++) {
             long start = System.currentTimeMillis();
-            new Mandelbrot().setVisible(true);
+            Mandelbrot mandelbrot = new Mandelbrot();
+            mandelbrot.saveFileAsJpg(mandelbrot.I);
             long elipsed = System.currentTimeMillis() - start;
             saveTimeInFile("Axel : "+elipsed);
             System.out.println(elipsed);
