@@ -45,25 +45,25 @@ public class Mandelbrot extends JFrame {
         invertBlackAndWhite(I);
     }
 
-    public static String getFractalFromBuffer() throws IOException {
+    public static byte[] getFractalFromBuffer() throws IOException {
         BufferedImage originalImage = ImageIO.read(new File(IMAGE_MANDELBROT_PATH));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write( originalImage, "jpg", baos );
         baos.flush();
-        String imageInByte = baos.toString();
+        byte[] imageInByte = baos.toByteArray();
         baos.close();
 
         return imageInByte;
     }
 
-    public static byte[] convertFileContentToBlob()
-            throws IOException {
-        // get path object pointing to file
-        Path filePath = Paths.get(IMAGE_MANDELBROT_PATH);
-        // get byte array with file contents
-        byte[] fileContent = Files.readAllBytes(filePath);
-        return fileContent;
-    }
+//    public static byte[] convertFileContentToBlob()
+//            throws IOException {
+//        // get path object pointing to file
+//        Path filePath = Paths.get(IMAGE_MANDELBROT_PATH);
+//        // get byte array with file contents
+//        byte[] fileContent = Files.readAllBytes(filePath);
+//        return fileContent;
+//    }
 
     @Override
     public void paint(Graphics g) {
