@@ -16,7 +16,7 @@ public class MandelController {
 
     public void switchDirection(String direction) {
         final int pas = 50;
-        int zoom = 200;
+        double zoom = 600;
         int posX = -400;
         int posY = -400;
 
@@ -52,7 +52,6 @@ public class MandelController {
         direction = direction.substring(1,direction.length()-1);
         switchDirection(direction);
         byte[] response = null;
-        System.out.println("direction");
         try {
             response = Mandelbrot.getFractalFromBuffer();
         } catch (IOException e) {
@@ -62,7 +61,7 @@ public class MandelController {
         return response;
     }
 
-    private static void RenderImage(int zoom, int posX, int posY) {
+    private static void RenderImage(double zoom, int posX, int posY) {
         Mandelbrot mandelbrot = new Mandelbrot(zoom,posX, posY); // iniialize at -250 and then user moves
         mandelbrot.saveFileAsJpg(mandelbrot.I);
     }
