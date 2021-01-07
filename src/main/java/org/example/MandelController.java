@@ -2,16 +2,38 @@ package org.example;
 
 import org.example.core.Template;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class MandelController {
-    public String MandelRefresh() {
+    private boolean isGenerate = false;
+
+    public String MandelInitialise() {
         //DO the thing
-        RenderImage();
+        if (!isGenerate) {
+            RenderImage();
+        }
+        isGenerate = true;
         return Template.render("home.html", new HashMap<>());
     }
 
-    public static void RenderImage() {
+    public String MandelRefresh() {
+        //DO the thing
+        if (!isGenerate) {
+            RenderImage();
+        }
+        String response = new String("");
+        try {
+            isGenerate = true;
+            response = Mandelbrot.getFractalFromBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+            //return error img byte
+        }
+        return response;
+    }
+
+    private static void RenderImage() {
         Mandelbrot mandelbrot = new Mandelbrot(150);
         mandelbrot.saveFileAsJpg(mandelbrot.I);
     }

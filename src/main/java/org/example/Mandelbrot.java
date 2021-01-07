@@ -20,7 +20,7 @@ public class Mandelbrot extends JFrame {
     public Mandelbrot(double zoom) {
         super("Mandelbrot Set");
         ZOOM = zoom;
-        setBounds(100, 100, 500, 500);
+        setBounds(100, 100, 1000, 1000);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY);
