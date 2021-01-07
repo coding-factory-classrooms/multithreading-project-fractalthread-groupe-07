@@ -10,7 +10,4 @@ function getImage(direction) {
 }
 
 getImage("up");
-getImage("up");
-getImage("up");
-getImage("up");
-getImage("up");
+//btn appelle get image
