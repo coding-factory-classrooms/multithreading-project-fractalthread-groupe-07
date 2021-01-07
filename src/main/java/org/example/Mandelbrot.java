@@ -45,7 +45,7 @@ public class Mandelbrot extends JFrame {
     public void saveFileAsJng(BufferedImage bufferedImage) {
         try {
             BufferedImage bi = bufferedImage;
-            File outputFile = new File("src/main/resources/static/img/mandelbro.jpg");
+            File outputFile = new File("src/main/resources/static/img/mandelbrot.jpg");
             ImageIO.write(bi, "jpg", outputFile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +63,6 @@ public class Mandelbrot extends JFrame {
                 } else {
                     I.setRGB(x, y, Color.white.getRGB());
                 }
-
             }
         }
 
