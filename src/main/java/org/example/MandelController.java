@@ -12,17 +12,16 @@ public class MandelController {
         return Template.render("home.html", new HashMap<>());
     }
 
-
-
     public void switchDirection(String direction) {
-        final int pas = 50;
-        double zoom = 600;
+        final int pas = 500;
+        double zoom = 200;
         int posX = -400;
         int posY = -400;
 
         switch (direction) {
             case "up" :
                 RenderImage(zoom, posX, posY+pas);
+                System.out.println("je suis trop up sa mere");
                 break;
             case "down" :
                 RenderImage(zoom, posX, posY-pas);
