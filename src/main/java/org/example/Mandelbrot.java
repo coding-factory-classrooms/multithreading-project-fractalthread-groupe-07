@@ -61,7 +61,7 @@ public class Mandelbrot extends JFrame {
     public void saveFileAsJpg(BufferedImage bufferedImage) {
         try {
             BufferedImage bi = bufferedImage;
-            File outputFile = new File("src/main/resources/static/img/mandelbrot.jpg");
+            File outputFile = new File(IMAGE_MANDELBROT_PATH);
             ImageIO.write(bi, "jpg", outputFile);
         } catch (Exception e) {
             e.printStackTrace();
