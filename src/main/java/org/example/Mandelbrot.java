@@ -14,21 +14,24 @@ public class Mandelbrot extends JFrame {
     private final double ZOOM;
     public BufferedImage I;
     private double zx, zy, cX, cY, tmp;
+    private int posX, posY;
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
 
 
-    public Mandelbrot(double zoom) {
+    public Mandelbrot(double zoom, int posX, int posY) {
         super("Mandelbrot Set");
         ZOOM = zoom;
-        setBounds(100, 100, 1000, 1000);
+        posX = posX;
+        posY = posY;
+        setBounds(0, 0, 1000, 1000);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY);
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
                 zx = zy = 0;
-                cX = (x - 500) / ZOOM;
-                cY = (y - 500) / ZOOM;
+                cX = (x + posX) / ZOOM;
+                cY = (y - posY) / ZOOM;
                 int iter = MAX_ITER;
                 while (zx * zx + zy * zy < 4 && iter > 0) {
                     tmp = zx * zx - zy * zy + cX;

@@ -34,7 +34,7 @@ public class MandelController {
     }
 
     private static void RenderImage() {
-        Mandelbrot mandelbrot = new Mandelbrot(150);
+        Mandelbrot mandelbrot = new Mandelbrot(450,-150, -200); // iniialize at -250 and then user moves
         mandelbrot.saveFileAsJpg(mandelbrot.I);
     }
 }
