@@ -32,8 +32,8 @@ public class MandelController {
 //        return null;
 //    }
 
-    private static void RenderImage() throws IOException {
-        Mandelbrot mandelbrot = new Mandelbrot(150);
+    private static void RenderImage() {
+        Mandelbrot mandelbrot = new Mandelbrot(200,-400, -400); // iniialize at -250 and then user moves
         mandelbrot.saveFileAsJpg(mandelbrot.I);
         mandelbrot.getFractalFromBuffer();
         //mandelbrot.saveFileAsJpg(mandelbrot.I);
