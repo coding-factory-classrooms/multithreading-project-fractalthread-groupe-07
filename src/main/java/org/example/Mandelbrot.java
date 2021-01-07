@@ -11,14 +11,15 @@ import javax.swing.JFrame;
 
 public class Mandelbrot extends JFrame {
     private final int MAX_ITER = 570;
-    private final double ZOOM = 150;
+    private final double ZOOM;
     public BufferedImage I;
     private double zx, zy, cX, cY, tmp;
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
 
 
-    public Mandelbrot() {
+    public Mandelbrot(double zoom) {
         super("Mandelbrot Set");
+        ZOOM = zoom;
         setBounds(100, 100, 500, 500);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
