@@ -12,7 +12,7 @@ public class MandelController {
     }
 
     public static void RenderImage() {
-        Mandelbrot mandelbrot = new Mandelbrot();
+        Mandelbrot mandelbrot = new Mandelbrot(150);
         mandelbrot.saveFileAsJpg(mandelbrot.I);
     }
 }
