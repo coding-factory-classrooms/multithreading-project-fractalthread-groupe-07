@@ -11,11 +11,9 @@ public class App {
     public static void main(String[] args) {
         initialize();
 
-        new Mandelbrot().setVisible(true);
+        MandelController mandelController = new MandelController();
 
-        Spark.get("/", (req, res) -> {
-            return Template.render("home.html", new HashMap<>());
-        });
+        Spark.get("/", (req, res) -> mandelController.MandelRefresh());
     }
 
     static void initialize() {

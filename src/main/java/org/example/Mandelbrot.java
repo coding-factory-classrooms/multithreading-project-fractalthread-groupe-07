@@ -2,6 +2,7 @@ package org.example;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,12 +12,14 @@ import javax.swing.JFrame;
 public class Mandelbrot extends JFrame {
     private final int MAX_ITER = 570;
     private final double ZOOM = 150;
-    private BufferedImage I;
+    public BufferedImage I;
     private double zx, zy, cX, cY, tmp;
+    private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
+
 
     public Mandelbrot() {
         super("Mandelbrot Set");
-        setBounds(100, 100, 1000, 1000);
+        setBounds(100, 100, 500, 500);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY);
@@ -36,11 +39,17 @@ public class Mandelbrot extends JFrame {
             }
         }
         invertBlackAndWhite(I);
-        saveFileAsJng(I);
     }
 
-    public void generateMandelbrot() {
+    public static String getFractalFromBuffer() throws IOException {
+        BufferedImage originalImage = ImageIO.read(new File(IMAGE_MANDELBROT_PATH));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write( originalImage, "jpg", baos );
+        baos.flush();
+        String imageInByte = baos.toString();
+        baos.close();
 
+        return imageInByte;
     }
 
     @Override
@@ -48,7 +57,7 @@ public class Mandelbrot extends JFrame {
         g.drawImage(I, 0, 0, this);
     }
 
-    public void saveFileAsJng(BufferedImage bufferedImage) {
+    public void saveFileAsJpg(BufferedImage bufferedImage) {
         try {
             BufferedImage bi = bufferedImage;
             File outputFile = new File("src/main/resources/static/img/mandelbrot.jpg");
@@ -87,16 +96,5 @@ public class Mandelbrot extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-//        for (int i = 0; i < 10; i++) {
-            long start = System.currentTimeMillis();
-            new Mandelbrot().setVisible(true);
-            long elipsed = System.currentTimeMillis() - start;
-            saveTimeInFile("Axel : "+elipsed);
-            System.out.println(elipsed);
-//        }
-
     }
 }
