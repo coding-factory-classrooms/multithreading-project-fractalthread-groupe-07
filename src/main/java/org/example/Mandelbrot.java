@@ -2,6 +2,7 @@ package org.example;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +14,8 @@ public class Mandelbrot extends JFrame {
     private final double ZOOM = 150;
     public BufferedImage I;
     private double zx, zy, cX, cY, tmp;
+    private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
+
 
     public Mandelbrot() {
         super("Mandelbrot Set");
@@ -38,8 +41,15 @@ public class Mandelbrot extends JFrame {
         invertBlackAndWhite(I);
     }
 
-    public void generateMandelbrot() {
+    public static String getFractalFromBuffer() throws IOException {
+        BufferedImage originalImage = ImageIO.read(new File(IMAGE_MANDELBROT_PATH));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write( originalImage, "jpg", baos );
+        baos.flush();
+        String imageInByte = baos.toString();
+        baos.close();
 
+        return imageInByte;
     }
 
     @Override
