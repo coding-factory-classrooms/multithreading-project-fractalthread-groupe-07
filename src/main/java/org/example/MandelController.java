@@ -32,6 +32,14 @@ public class MandelController {
         }
         return response;
     }
+    public byte[] convertFileContentToBlob() {
+        try {
+            return Mandelbrot.convertFileContentToBlob();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     private static void RenderImage() {
         Mandelbrot mandelbrot = new Mandelbrot(150);

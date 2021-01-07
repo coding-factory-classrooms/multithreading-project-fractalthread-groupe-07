@@ -14,7 +14,8 @@ public class App {
         MandelController mandelController = new MandelController();
 
         Spark.get("/", (req, res) -> mandelController.MandelInitialise());
-        Spark.get("/getImage", (req, res) -> mandelController.MandelRefresh());
+//        Spark.get("/getImage", (req, res) -> mandelController.MandelRefresh());
+        Spark.get("/getImage", (req, res) -> mandelController.convertFileContentToBlob());
     }
 
     static void initialize() {
