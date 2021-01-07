@@ -3,6 +3,8 @@ package org.example;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
@@ -37,6 +39,10 @@ public class Mandelbrot extends JFrame {
         saveFileAsJng(I);
     }
 
+    public void generateMandelbrot() {
+
+    }
+
     @Override
     public void paint(Graphics g) {
         g.drawImage(I, 0, 0, this);
@@ -69,7 +75,28 @@ public class Mandelbrot extends JFrame {
         return imageOut;
     }
 
+    public static void saveTimeInFile(String timeToWrite) {
+        try {
+            FileWriter writer = new FileWriter("stats.md", true);
+            writer.write("\r\n");
+            writer.write(timeToWrite);
+            writer.write("-------------------------------------------------------------------------");
+            writer.write("\r\n");
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        new Mandelbrot().setVisible(true);
+//        for (int i = 0; i < 10; i++) {
+            long start = System.currentTimeMillis();
+            new Mandelbrot().setVisible(true);
+            long elipsed = System.currentTimeMillis() - start;
+            saveTimeInFile("Axel : "+elipsed);
+            System.out.println(elipsed);
+//        }
+
     }
 }
