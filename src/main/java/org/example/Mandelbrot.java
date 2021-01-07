@@ -14,15 +14,15 @@ public class Mandelbrot extends JFrame {
 
     public Mandelbrot() {
         super("Mandelbrot Set");
-        setBounds(100, 100, 800, 600);
+        setBounds(100, 100, 1000, 1000);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY);
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
                 zx = zy = 0;
-                cX = (x - 400) / ZOOM;
-                cY = (y - 300) / ZOOM;
+                cX = (x - 500) / ZOOM;
+                cY = (y - 500) / ZOOM;
                 int iter = MAX_ITER;
                 while (zx * zx + zy * zy < 4 && iter > 0) {
                     tmp = zx * zx - zy * zy + cX;
