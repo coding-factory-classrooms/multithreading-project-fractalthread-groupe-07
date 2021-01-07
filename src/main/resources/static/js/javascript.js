@@ -3,6 +3,7 @@ function getImage() {
 //    .then(data => console.log(data));
 
     fetch('/getImage')
+    document.getElementById("mandelbrotImage").src=data;
     .then(response => response.blob())
     .then(data => document.getElementById("mandelbrotImage").src=URL.createObjectURL(data));
 //    document.getElementById("mandelbrotImage").src=data;

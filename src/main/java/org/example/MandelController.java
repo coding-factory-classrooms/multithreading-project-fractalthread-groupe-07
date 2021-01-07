@@ -32,8 +32,14 @@ public class MandelController {
 //        return null;
 //    }
 
-    private static void RenderImage() {
+    private static void RenderImage() throws IOException {
         Mandelbrot mandelbrot = new Mandelbrot(150);
         mandelbrot.saveFileAsJpg(mandelbrot.I);
+        mandelbrot.getFractalFromBuffer();
+        //mandelbrot.saveFileAsJpg(mandelbrot.I);
     }
+
+
+
+
 }
