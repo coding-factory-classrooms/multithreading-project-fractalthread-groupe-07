@@ -5,6 +5,7 @@ import org.example.core.Template;
 import org.example.middlewares.LoggerMiddleware;
 import spark.Spark;
 
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class App {
@@ -14,7 +15,7 @@ public class App {
         MandelController mandelController = new MandelController();
 
         Spark.get("/", (req, res) -> mandelController.MandelInitialise());
-        Spark.get("/getImage", (req, res) -> mandelController.mandelRefresh());
+        Spark.post("/getImage", (req, res) -> mandelController.mandelRefresh(req.body()));
 //        Spark.get("/getImage", (req, res) -> mandelController.convertFileContentToBlob());
     }
 

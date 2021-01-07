@@ -59,15 +59,6 @@ public class Mandelbrot extends JFrame {
         return imageInByte;
     }
 
-//    public static byte[] convertFileContentToBlob()
-//            throws IOException {
-//        // get path object pointing to file
-//        Path filePath = Paths.get(IMAGE_MANDELBROT_PATH);
-//        // get byte array with file contents
-//        byte[] fileContent = Files.readAllBytes(filePath);
-//        return fileContent;
-//    }
-
     @Override
     public void paint(Graphics g) {
         g.drawImage(I, 0, 0, this);
