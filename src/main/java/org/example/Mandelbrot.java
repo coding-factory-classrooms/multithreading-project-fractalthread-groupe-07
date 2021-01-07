@@ -11,12 +11,12 @@ import javax.swing.JFrame;
 public class Mandelbrot extends JFrame {
     private final int MAX_ITER = 570;
     private final double ZOOM = 150;
-    private BufferedImage I;
+    public BufferedImage I;
     private double zx, zy, cX, cY, tmp;
 
     public Mandelbrot() {
         super("Mandelbrot Set");
-        setBounds(100, 100, 1000, 1000);
+        setBounds(100, 100, 500, 500);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY);
@@ -86,17 +86,5 @@ public class Mandelbrot extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-//        for (int i = 0; i < 10; i++) {
-            long start = System.currentTimeMillis();
-            Mandelbrot mandelbrot = new Mandelbrot();
-            mandelbrot.saveFileAsJpg(mandelbrot.I);
-            long elipsed = System.currentTimeMillis() - start;
-            saveTimeInFile("Axel : "+elipsed);
-            System.out.println(elipsed);
-//        }
-
     }
 }
