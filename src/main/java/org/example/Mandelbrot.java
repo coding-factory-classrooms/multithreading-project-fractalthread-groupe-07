@@ -33,7 +33,9 @@ public class Mandelbrot extends JFrame {
         I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
-
+//TODO : run 1 thread by processor
+//              FirstTask task = new FirstTask();
+//            threadPool.execute(task);
 
                 zx = zy = 0;
                 cX = (x + posX) / ZOOM;
