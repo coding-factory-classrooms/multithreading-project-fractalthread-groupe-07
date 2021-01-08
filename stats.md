@@ -1,11 +1,3 @@
-Pour chaque membre de l'equipe :
-
-Generation fractal sur 10 runs *sans threads* :
-Axel : 668,9 ms
-Nono : 1716 ms
-Vincent : 1716,7 ms
-Generation fractal sur 10 runs *avec threads* :
-
-Axel : 2638-------------------------------------------------------------------------
-
-Axel : 2499-------------------------------------------------------------------------
+Génération du fractal sur 10 runs *sans threads* par membre d'équipe: 
+custodioanthony - 8 janv. 2021 15:27 - 1151 average ms
+-------------------------------------------------------------------------

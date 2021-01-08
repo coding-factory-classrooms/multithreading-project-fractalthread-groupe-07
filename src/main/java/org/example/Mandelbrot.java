@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Mandelbrot extends JFrame {
-    private final int MAX_ITER = 570;
+    private final int MAX_ITER = 5000;
     private final double ZOOM;
     public BufferedImage I;
     private double zx, zy, cX, cY, tmp;
@@ -89,19 +89,5 @@ public class Mandelbrot extends JFrame {
         }
 
         return imageOut;
-    }
-
-    public static void saveTimeInFile(String timeToWrite) {
-        try {
-            FileWriter writer = new FileWriter("stats.md", true);
-            writer.write("\r\n");
-            writer.write(timeToWrite);
-            writer.write("-------------------------------------------------------------------------");
-            writer.write("\r\n");
-
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
