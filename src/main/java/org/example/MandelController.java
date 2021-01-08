@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class MandelController {
-    final int pas = 50;
+    final int pas = 100;
     double zoom = 200;
     int posX = -400;
     int posY = -400;
@@ -77,7 +77,7 @@ public class MandelController {
     private static void RenderImage(double zoom, int posX, int posY) throws IOException {
         //BOOLEAN BELOW MUST BE SWITCH TO TRUE IF YOU WANT TO WRITE YOUR TIME IN stats.md FILE
 
-        boolean statsTenToWrite = true;
+        boolean statsTenToWrite = false;
         long stepMS = 0;
 
         if (statsTenToWrite) {

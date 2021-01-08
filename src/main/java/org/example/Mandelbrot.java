@@ -19,6 +19,7 @@ public class Mandelbrot extends JFrame {
     private double zx, zy, cX, cY, tmp;
     private int posX, posY;
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
+    private static final int BEAUTIFUL_COLORS = 1000000;
 
 
     public Mandelbrot(double zoom, int posX, int posY) {
@@ -29,9 +30,11 @@ public class Mandelbrot extends JFrame {
         setBounds(0, 0, 1000, 1000);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+        I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
+
+
                 zx = zy = 0;
                 cX = (x + posX) / ZOOM;
                 cY = (y + posY) / ZOOM;
@@ -42,11 +45,12 @@ public class Mandelbrot extends JFrame {
                     zx = tmp;
                     iter--;
                 }
-                I.setRGB(x, y, iter | (iter << 8));
+                I.setRGB(x, y, iter*BEAUTIFUL_COLORS);
             }
         }
-        invertBlackAndWhite(I);
     }
+
+
 
     public static byte[] getFractalFromBuffer() throws IOException {
         BufferedImage originalImage = ImageIO.read(new File(IMAGE_MANDELBROT_PATH));
@@ -72,22 +76,5 @@ public class Mandelbrot extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public BufferedImage invertBlackAndWhite(BufferedImage image) {
-        BufferedImage imageOut = image;
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                Color c = new Color(image.getRGB(x, y));
-                //invert white into black
-                if (c.equals(Color.white)) {
-                    I.setRGB(x, y, Color.black.getRGB());
-                } else {
-                    I.setRGB(x, y, Color.white.getRGB());
-                }
-            }
-        }
-
-        return imageOut;
     }
 }
