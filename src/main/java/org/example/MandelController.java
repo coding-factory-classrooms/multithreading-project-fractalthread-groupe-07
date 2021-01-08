@@ -40,8 +40,12 @@ public class MandelController {
                 this.zoom = zoom+pas;
                 break;
             case "unzoom" :
-                RenderImage(zoom-pas, posX, posY);
-                this.zoom = zoom-pas;
+                if (zoom-pas < 0) {
+                    break;
+                } else {
+                    RenderImage(zoom-pas, posX, posY);
+                    this.zoom = zoom-pas;
+                }
                 break;
             default :
                 RenderImage(zoom, posX, posY);
