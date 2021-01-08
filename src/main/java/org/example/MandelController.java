@@ -13,7 +13,7 @@ public class MandelController {
     }
 
     public void switchDirection(String direction) {
-        final int pas = 500;
+        final int pas = 250;
         double zoom = 200;
         int posX = -400;
         int posY = -400;
@@ -26,10 +26,10 @@ public class MandelController {
                 RenderImage(zoom, posX, posY-pas);
                 break;
             case "left" :
-                RenderImage(zoom, posX-pas, posY);
+                RenderImage(zoom, posX+pas, posY);
                 break;
             case "right" :
-                RenderImage(zoom, posX+pas, posY);
+                RenderImage(zoom, posX-pas, posY);
                 break;
             case "zoom" :
                 RenderImage(zoom+pas, posX, posY);
