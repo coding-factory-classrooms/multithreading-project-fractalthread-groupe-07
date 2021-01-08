@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class MandelController {
+    final int pas = 50;
+    double zoom = 200;
+    int posX = -400;
+    int posY = -400;
     public String MandelInitialise() {
         //DO the thing
         RenderImage(200,-400, -400);
@@ -13,29 +17,31 @@ public class MandelController {
     }
 
     public void switchDirection(String direction) {
-        final int pas = 250;
-        double zoom = 200;
-        int posX = -400;
-        int posY = -400;
 
         switch (direction) {
             case "up" :
-                RenderImage(zoom, posX, posY+pas);
+                RenderImage(zoom, posX, posY-pas);
+                this.posY = posY-pas;
                 break;
             case "down" :
-                RenderImage(zoom, posX, posY-pas);
+                RenderImage(zoom, posX, posY+pas);
+                this.posY = posY+pas;
                 break;
             case "left" :
-                RenderImage(zoom, posX+pas, posY);
+                RenderImage(zoom, posX-pas, posY);
+                this.posX = posX-pas;
                 break;
             case "right" :
-                RenderImage(zoom, posX-pas, posY);
+                RenderImage(zoom, posX+pas, posY);
+                this.posX = posX+pas;
                 break;
             case "zoom" :
                 RenderImage(zoom+pas, posX, posY);
+                this.zoom = zoom+pas;
                 break;
             case "unzoom" :
                 RenderImage(zoom-pas, posX, posY);
+                this.zoom = zoom-pas;
                 break;
             default :
                 RenderImage(zoom, posX, posY);
