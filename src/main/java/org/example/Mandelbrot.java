@@ -24,8 +24,8 @@ public class Mandelbrot extends JFrame {
     public Mandelbrot(double zoom, int posX, int posY) {
         super("Mandelbrot Set");
         ZOOM = zoom;
-        posX = posX;
-        posY = posY;
+        this.posX = posX;
+        this.posY = posY;
         setBounds(0, 0, 1000, 1000);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

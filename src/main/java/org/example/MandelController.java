@@ -13,7 +13,7 @@ public class MandelController {
     }
 
     public void switchDirection(String direction) {
-        final int pas = 500;
+        final int pas = 250;
         double zoom = 200;
         int posX = -400;
         int posY = -400;
@@ -21,16 +21,15 @@ public class MandelController {
         switch (direction) {
             case "up" :
                 RenderImage(zoom, posX, posY+pas);
-                System.out.println("je suis trop up sa mere");
                 break;
             case "down" :
                 RenderImage(zoom, posX, posY-pas);
                 break;
             case "left" :
-                RenderImage(zoom, posX-pas, posY);
+                RenderImage(zoom, posX+pas, posY);
                 break;
             case "right" :
-                RenderImage(zoom, posX+pas, posY);
+                RenderImage(zoom, posX-pas, posY);
                 break;
             case "zoom" :
                 RenderImage(zoom+pas, posX, posY);
@@ -40,15 +39,13 @@ public class MandelController {
                 break;
             default :
                 RenderImage(zoom, posX, posY);
-                System.out.println("ça marche pâaaa "+direction);
                 break;
-
         }
 
     }
 
     public byte[] mandelRefresh(String direction) {
-        direction = direction.substring(1,direction.length()-1);
+       // direction = direction.substring(1,direction.length()-1);
         switchDirection(direction);
         byte[] response = null;
         try {
