@@ -12,8 +12,9 @@ public class App {
     public static void main(String[] args) {
         initialize();
 
-        int basicSide = 1000;
-        MandelController mandelController = new MandelController(basicSide);
+        int verticalSide = 1000;
+        int horizontalSide = 1000;
+        MandelController mandelController = new MandelController(verticalSide, horizontalSide);
 
         Spark.get("/", (req, res) -> mandelController.mandelInitialise());
         Spark.get("/getImage", (req, res) -> mandelController.mandelRefresh(req.queryParamOrDefault("direction",null)));

@@ -17,19 +17,21 @@ public class Mandelbrot extends JFrame implements Fractal {
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
     private static final int BEAUTIFUL_COLORS = 6868;
 
-    private int side = 1000;
+    private int verticalSide = 1000;
+    private int horizontalSide = 1000;
 
 
-    public Mandelbrot(int side, double zoom, int posX, int posY) {
+    public Mandelbrot(int verticalSide, int horizontalSide, double zoom, int posX, int posY) {
         super("Mandelbrot Set");
         ZOOM = zoom;
         this.posX = posX;
         this.posY = posY;
-        setBounds(0, 0, side, side);
+        setBounds(0, 0, verticalSide, horizontalSide);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.side = side;
-        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
+        this.horizontalSide = horizontalSide;
+        this.verticalSide = verticalSide;
+        image = new BufferedImage(horizontalSide, verticalSide, BufferedImage.TYPE_INT_RGB);
     }
 
     public void generateImageWithoutThreading() {
@@ -84,12 +86,20 @@ public class Mandelbrot extends JFrame implements Fractal {
         return image;
     }
 
-    public int getSide() {
-        return side;
+    public int getHorizontalSide() {
+        return horizontalSide;
     }
 
-    public void setSide(int side) {
-        this.side = side;
+    public void setHorizontalSide(int verticalSide) {
+        this.horizontalSide = verticalSide;
+    }
+
+    public int getVerticalSide() {
+        return verticalSide;
+    }
+
+    public void setVerticalSide(int horizontalSide) {
+        this.horizontalSide = horizontalSide;
     }
 
 }
