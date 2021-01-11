@@ -16,3 +16,6 @@ Axel - 11 janv. 2021 10:54 - 2235 average ms
 Génération du fractal sur 10 runs *avec threads* par membre d'équipe: 
 Axel - 11 janv. 2021 10:56 - 1977 average ms
 -------------------------------------------------------------------------
+Génération du fractal sur 10 runs *avec threads* par membre d'équipe: 
+bounaixvincent - 11 Jan 2021, 10:59 - 1434 average ms
+-------------------------------------------------------------------------
