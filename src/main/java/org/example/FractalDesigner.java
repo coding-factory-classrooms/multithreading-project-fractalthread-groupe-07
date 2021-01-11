@@ -13,7 +13,7 @@ public class FractalDesigner {
 
     public void designFractal () {
         int coreNumber = Runtime.getRuntime().availableProcessors();
-        ExecutorService threadPool = Executors.newFixedThreadPool(coreNumber);
+        ExecutorService threadPool = Executors.newFixedThreadPool(coreNumber+4);
 
         FractalTask.setFractal(fractal);
 

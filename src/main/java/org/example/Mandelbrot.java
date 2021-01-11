@@ -29,14 +29,11 @@ public class Mandelbrot extends JFrame implements Fractal {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        for (int y = 0; y < getHeight(); y++) {
-            for (int x = 0; x < getWidth(); x++) {
-//TODO : run 1 thread by processor
-//              FirstTask task = new FirstTask();
-//            threadPool.execute(task);
-                draw(x,y);// generation without threads
-            }
-        }
+//        for (int y = 0; y < getHeight(); y++) {
+//            for (int x = 0; x < getWidth(); x++) {
+//                //draw(x,y);// generation without threads
+//            }
+//        }
     }
 
     public void draw(int x, int y) {

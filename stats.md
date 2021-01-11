@@ -7,3 +7,9 @@ bounaixvincent - 8 Jan 2021, 15:36 - 1512 average ms
 Génération du fractal sur 10 runs *sans threads* par membre d'équipe: 
 Axel - 8 janv. 2021 16:20 - 1731 average ms
 -------------------------------------------------------------------------
+Génération du fractal sur 10 runs *avec threads* par membre d'équipe:  +0
+Axel - 11 janv. 2021 10:54 - 2235 average ms
+-------------------------------------------------------------------------
+Génération du fractal sur 10 runs *avec threads* par membre d'équipe: 
+Axel - 11 janv. 2021 10:56 - 1977 average ms
+-------------------------------------------------------------------------
