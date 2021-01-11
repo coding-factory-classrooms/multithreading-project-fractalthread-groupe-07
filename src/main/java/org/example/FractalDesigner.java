@@ -13,16 +13,23 @@ public class FractalDesigner {
 
     public void designFractal () {
         int coreNumber = Runtime.getRuntime().availableProcessors();
-        ExecutorService threadPool = Executors.newFixedThreadPool(coreNumber+4);
+        ExecutorService threadPool = Executors.newFixedThreadPool(coreNumber);
+
+        int linesByChunk = 100;
 
         FractalTask.setFractal(fractal);
+        FractalTask.setLinesByChunk(linesByChunk);
 
-        for (int y = 0; y < fractal.getSide(); y++) {
-            for (int x = 0; x < fractal.getSide(); x++) {
-                FractalTask task = new FractalTask(x, y);
-                threadPool.execute(task);
+        for (int i = 0; i < fractal.getSide()/linesByChunk; i++) {
+            try{
+                Thread.sleep(20); // waiting 15ms to prevent having bugged stripes when proco is burning
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            FractalTask task = new FractalTask(i);
+            threadPool.execute(task);
         }
+
         threadPool.shutdown();
         try {
             threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);

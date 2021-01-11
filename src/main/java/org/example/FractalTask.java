@@ -1,23 +1,34 @@
 package org.example;
 
-import java.awt.image.BufferedImage;
-
 public class FractalTask implements Runnable {
     private static Fractal fractal;
-    private int x;
-    private int y;
+    private int posX;
+    private int posY;
+    private static int linesByChunk;
+    private int chunkIteration;
 
+    public FractalTask(int theChunkIteration) {
+        chunkIteration = theChunkIteration;
+    }
     public FractalTask(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.posX = x;
+        this.posY = y;
     }
 
     public static void setFractal(Fractal theFractal) {
         fractal = theFractal;
     }
 
+    public static void setLinesByChunk(int theLinesByChunk) {
+        linesByChunk = theLinesByChunk;
+    }
+
     @Override
     public void run() {
-        fractal.draw(x,y);
+        for (int y = 0; y < linesByChunk; y++) {
+            for (int x = 0; x < fractal.getSide(); x++) {
+                fractal.draw(x,y+chunkIteration*linesByChunk);
+            }
+        }
     }
 }
