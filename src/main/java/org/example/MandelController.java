@@ -81,7 +81,7 @@ public class MandelController {
         long stepMS = 0;
 
         if (statsTenToWrite) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 1; i++) {
                 long start = System.currentTimeMillis();
                 Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
                 new FractalDesigner(mandelbrot).designFractal();
