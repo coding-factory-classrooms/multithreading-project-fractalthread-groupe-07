@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MandelController {
     final int pas = 100;
@@ -95,6 +96,10 @@ public class MandelController {
                 mandelbrot.saveFileAsJpg(mandelbrot.image);
                 long elapsed = System.currentTimeMillis() - start;
                 stepMS = stepMS + elapsed;
+
+                FileWriter writer = new FileWriter("stats.md", true);
+                writer.write("multithread: " + String.format(String.valueOf(withThreading)).toUpperCase(Locale.ROOT) + " Run " + i + " sur " + runs +" avec un fractal de "+side + "px sur " +  "TPS " + elapsed + "MS"+ "\r\n");
+                writer.close();
             }
 
             Date dateNow = new Date();
