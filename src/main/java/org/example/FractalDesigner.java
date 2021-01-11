@@ -21,6 +21,11 @@ public class FractalDesigner {
         FractalTask.setLinesByChunk(linesByChunk);
 
         for (int i = 0; i < fractal.getSide()/linesByChunk; i++) {
+            try {
+                Thread.sleep(15);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             FractalTask task = new FractalTask(i);
             threadPool.execute(task);
         }
