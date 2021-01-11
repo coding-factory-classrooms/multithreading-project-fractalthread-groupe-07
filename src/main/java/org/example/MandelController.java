@@ -122,6 +122,7 @@ public class MandelController {
     public static void saveTimeInFile(String timeToWrite) {
         try {
             FileWriter writer = new FileWriter("stats.md", true);
+
             writer.write(System.getProperty("user.name") + " - " + timeToWrite + " " + "average" + " ms" + "\r\n");
             writer.write("-------------------------------------------------------------------------");
             writer.write("\r\n");
