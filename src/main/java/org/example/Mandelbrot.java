@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-public class Mandelbrot extends JFrame implements Fractal {
+public class Mandelbrot extends Fractal {
     private final int MAX_ITER = 5000;
     private final double ZOOM;
     public BufferedImage image;

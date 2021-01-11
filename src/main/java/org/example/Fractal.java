@@ -1,9 +1,15 @@
 package org.example;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 
-public interface Fractal {
-    int getSide();
-    BufferedImage getImage();
-    void draw(int x, int y);
+public abstract class Fractal extends JFrame {
+
+    abstract int getSide();
+    abstract BufferedImage getImage();
+    abstract void draw(int x, int y);
+
+    public Fractal(String title) {
+        super(title);
+    }
 }
