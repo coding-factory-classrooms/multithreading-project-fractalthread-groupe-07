@@ -22,7 +22,7 @@ public class MandelController {
 
     public String mandelInitialise() {
         try {
-            RenderImage(side,200, -400, -400);
+            RenderImage(side,zoom, posX, posY);
         } catch (IOException e) {
             e.printStackTrace();
         }
