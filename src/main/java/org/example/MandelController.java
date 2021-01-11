@@ -85,6 +85,7 @@ public class MandelController {
 
     public void writeStats(boolean withThreading, int runs, int side, double zoom, int posX, int posY) throws IOException {
             long stepMS = 0;
+            long startTotal = System.currentTimeMillis();
             for (int i = 0; i < runs; i++) {
                 long start = System.currentTimeMillis();
                 Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
@@ -98,9 +99,10 @@ public class MandelController {
                 stepMS = stepMS + elapsed;
 
                 FileWriter writer = new FileWriter("stats.md", true);
-                writer.write("multithread: " + String.format(String.valueOf(withThreading)).toUpperCase(Locale.ROOT) + " Run " + i + " sur " + runs +" avec un fractal de "+side + "px sur " +  "TPS " + elapsed + "MS"+ "\r\n");
+                writer.write("multithread: " + String.valueOf(withThreading).toUpperCase(Locale.ROOT) + " Run " + i + " sur " + runs +" avec un fractal de "+side + "px sur " +  "TPS " + elapsed + "MS"+ "\r\n");
                 writer.close();
             }
+            long elapsedTotal = System.currentTimeMillis() - startTotal;
 
             Date dateNow = new Date();
             DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
@@ -108,6 +110,7 @@ public class MandelController {
                     DateFormat.SHORT);
             try {
                 FileWriter writer = new FileWriter("stats.md", true);
+                writer.write("Total ELapsed Time:  " + elapsedTotal + " MS" + "\r\n");
                 writer.write("Génération du fractal de "+side+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
                 writer.close();
 
