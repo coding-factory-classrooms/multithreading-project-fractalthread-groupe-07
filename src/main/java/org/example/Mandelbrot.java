@@ -20,7 +20,7 @@ public class Mandelbrot extends JFrame implements Fractal {
     private int side = 1000;
 
 
-    public Mandelbrot(double zoom, int posX, int posY) {
+    public Mandelbrot(int side, double zoom, int posX, int posY) {
         super("Mandelbrot Set");
         ZOOM = zoom;
         this.posX = posX;
@@ -28,7 +28,8 @@ public class Mandelbrot extends JFrame implements Fractal {
         setBounds(0, 0, side, side);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        this.side = side;
+        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
     }
 
     public void generateImageWithoutThreading() {

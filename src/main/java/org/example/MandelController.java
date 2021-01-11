@@ -13,10 +13,15 @@ public class MandelController {
     double zoom = 200;
     int posX = -400;
     int posY = -400;
-    public String MandelInitialise() {
-        //DO the thing
+    private int side;
+
+    public MandelController(int side) {
+        this.side = side;
+    }
+
+    public String mandelInitialise() {
         try {
-            RenderImage(200, -400, -400);
+            RenderImage(side,200, -400, -400);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,67 +32,66 @@ public class MandelController {
 
         switch (direction) {
             case "up" :
-                RenderImage(zoom, posX, posY-pas);
+                RenderImage(side, zoom, posX, posY-pas);
                 this.posY = posY-pas;
                 break;
             case "down" :
-                RenderImage(zoom, posX, posY+pas);
+                RenderImage(side, zoom, posX, posY+pas);
                 this.posY = posY+pas;
                 break;
             case "left" :
-                RenderImage(zoom, posX-pas, posY);
+                RenderImage(side, zoom, posX-pas, posY);
                 this.posX = posX-pas;
                 break;
             case "right" :
-                RenderImage(zoom, posX+pas, posY);
+                RenderImage(side, zoom, posX+pas, posY);
                 this.posX = posX+pas;
                 break;
             case "zoom" :
-                RenderImage(zoom+pas, posX, posY);
+                RenderImage(side,zoom+pas, posX, posY);
                 this.zoom = zoom+pas;
                 break;
             case "unzoom" :
                 if (zoom-pas < 0) {
                     break;
                 } else {
-                    RenderImage(zoom-pas, posX, posY);
+                    RenderImage(side,zoom-pas, posX, posY);
                     this.zoom = zoom-pas;
                 }
                 break;
             default:
-                RenderImage(zoom, posX, posY);
+                RenderImage(side, zoom, posX, posY);
                 break;
         }
-
     }
 
     public byte[] mandelRefresh(String direction) throws IOException {
-        // direction = direction.substring(1,direction.length()-1);
         switchDirection(direction);
         byte[] response = null;
         try {
             response = Mandelbrot.getFractalFromBuffer();
         } catch (IOException e) {
             e.printStackTrace();
-            //return error img byte
         }
         return response;
     }
 
-    private static void RenderImage(double zoom, int posX, int posY) throws IOException {
-        Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
+    private static void RenderImage(int side, double zoom, int posX, int posY) throws IOException {
+        Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
         new FractalDesigner(mandelbrot).designFractal();
         mandelbrot.saveFileAsJpg(mandelbrot.image);
     }
 
-    public static void writeStats(double zoom, int posX, int posY) throws IOException {
+    public void writeStats(boolean withThreading, int runs, int side, double zoom, int posX, int posY) throws IOException {
             long stepMS = 0;
-            int runs = 10;
-
             for (int i = 0; i < runs; i++) {
                 long start = System.currentTimeMillis();
-                Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
-                new FractalDesigner(mandelbrot).designFractal();
+                Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
+                if (withThreading) {
+                    new FractalDesigner(mandelbrot).designFractal();
+                } else {
+                    mandelbrot.generateImageWithoutThreading();
+                }
                 mandelbrot.saveFileAsJpg(mandelbrot.image);
                 long elapsed = System.currentTimeMillis() - start;
                 stepMS = stepMS + elapsed;
@@ -99,7 +103,7 @@ public class MandelController {
                     DateFormat.SHORT);
             try {
                 FileWriter writer = new FileWriter("stats.md", true);
-                writer.write("Génération du fractal sur "+runs+" runs *avec threads* par membre d'équipe: " + "\r\n");
+                writer.write("Génération du fractal sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
                 writer.close();
 
                 String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
@@ -128,7 +132,14 @@ public class MandelController {
      */
     public static void main(String[] args) {
         try {
-            writeStats(200, -400, -400);
+            int side = 500;
+            MandelController controller = new MandelController(side);
+            int runs = 10;
+
+            System.out.println("_without threading_");
+            controller.writeStats(false,runs, side,200, -400, -400);
+            System.out.println("_with threading_");
+            controller.writeStats(true,runs,side,200, -400, -400);
             System.out.println("Stats OK");
         } catch (IOException e) {
             e.printStackTrace();
