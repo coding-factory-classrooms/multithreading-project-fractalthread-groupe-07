@@ -75,49 +75,12 @@ public class MandelController {
     }
 
     private static void RenderImage(double zoom, int posX, int posY) throws IOException {
-        //BOOLEAN BELOW MUST BE SWITCH TO TRUE IF YOU WANT TO WRITE YOUR TIME IN stats.md FILE
-
-        boolean statsTenToWrite = true;
-        long stepMS = 0;
-
-        int runs = 10;
-
-        if (statsTenToWrite) {
-            for (int i = 0; i < runs; i++) {
-                long start = System.currentTimeMillis();
-                Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
-                new FractalDesigner(mandelbrot).designFractal();
-                mandelbrot.saveFileAsJpg(mandelbrot.image);
-                long elapsed = System.currentTimeMillis() - start;
-                stepMS = stepMS + elapsed;
-            }
-
-            Date dateNow = new Date();
-            DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
-                    DateFormat.MEDIUM,
-                    DateFormat.SHORT);
-            try {
-                FileWriter writer = new FileWriter("stats.md", true);
-                writer.write("Génération du fractal sur "+runs+" runs *avec threads* par membre d'équipe: " + "\r\n");
-                writer.close();
-
-                String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
-
-                saveTimeInFile(dateAndTimeToSave);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
-            new FractalDesigner(mandelbrot).designFractal();
-            mandelbrot.saveFileAsJpg(mandelbrot.image);
-        }
+        Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
+        new FractalDesigner(mandelbrot).designFractal();
+        mandelbrot.saveFileAsJpg(mandelbrot.image);
     }
 
     public static void writeStats(double zoom, int posX, int posY) throws IOException {
-            //BOOLEAN BELOW MUST BE SWITCH TO TRUE IF YOU WANT TO WRITE YOUR TIME IN stats.md FILE
-            boolean statsTenToWrite = true;
-
             long stepMS = 0;
             int runs = 10;
 
@@ -160,5 +123,16 @@ public class MandelController {
         }
     }
 
+    /**
+     * Just for stats
+     */
+    public static void main(String[] args) {
+        try {
+            writeStats(200, -400, -400);
+            System.out.println("Stats OK");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
