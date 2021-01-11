@@ -68,9 +68,10 @@ public class MandelController {
 
     public byte[] mandelRefresh(String direction) throws IOException {
         switchDirection(direction);
+        Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY);
         byte[] response = null;
         try {
-            response = Mandelbrot.getFractalFromBuffer();
+            response = mandelbrot.getFractalFromBuffer();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,6 +80,7 @@ public class MandelController {
 
     private static void RenderImage(int side, double zoom, int posX, int posY) throws IOException {
         Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
+        mandelbrot.makeImage();
         new FractalDesigner(mandelbrot).designFractal();
         mandelbrot.saveFileAsJpg(mandelbrot.image);
     }
@@ -89,6 +91,7 @@ public class MandelController {
             for (int i = 0; i < runs; i++) {
                 long start = System.currentTimeMillis();
                 Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
+                mandelbrot.makeImage();
                 if (withThreading) {
                     new FractalDesigner(mandelbrot).designFractal();
                 } else {
