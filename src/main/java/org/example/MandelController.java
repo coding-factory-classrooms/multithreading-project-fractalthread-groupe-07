@@ -11,9 +11,9 @@ import java.util.Locale;
 
 public class MandelController {
     final int pas = 100;
-    double zoom = 200;
-    int posX = -400;
-    int posY = -400;
+    double zoom = 5800; //200
+    int posX = 2000; //400
+    int posY = -2600; //-400
     private int side;
 
     public MandelController(int side) {

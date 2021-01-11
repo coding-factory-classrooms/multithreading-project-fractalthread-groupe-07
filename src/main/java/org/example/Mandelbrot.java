@@ -15,7 +15,7 @@ public class Mandelbrot extends JFrame implements Fractal {
     private double zx, zy, cX, cY, tmp;
     private int posX, posY;
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
-    private static final int BEAUTIFUL_COLORS = 1000000;
+    private static final int BEAUTIFUL_COLORS = 6868;
 
     private int side = 1000;
 

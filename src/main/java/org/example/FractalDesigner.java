@@ -22,7 +22,7 @@ public class FractalDesigner {
 
         for (int i = 0; i < fractal.getSide()/linesByChunk; i++) {
             try{
-                Thread.sleep(10);
+                Thread.sleep(20); // waiting 15ms to prevent having bugged stripes when proco is burning
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
