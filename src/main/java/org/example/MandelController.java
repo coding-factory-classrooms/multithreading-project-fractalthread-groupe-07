@@ -103,7 +103,7 @@ public class MandelController {
                     DateFormat.SHORT);
             try {
                 FileWriter writer = new FileWriter("stats.md", true);
-                writer.write("Génération du fractal sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
+                writer.write("Génération du fractal de "+side+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
                 writer.close();
 
                 String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
@@ -132,7 +132,7 @@ public class MandelController {
      */
     public static void main(String[] args) {
         try {
-            int side = 500;
+            int side = 1000;
             MandelController controller = new MandelController(side);
             int runs = 10;
 
