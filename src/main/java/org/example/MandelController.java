@@ -77,14 +77,15 @@ public class MandelController {
     private static void RenderImage(double zoom, int posX, int posY) throws IOException {
         //BOOLEAN BELOW MUST BE SWITCH TO TRUE IF YOU WANT TO WRITE YOUR TIME IN stats.md FILE
 
-        boolean statsTenToWrite = false;
+        boolean statsTenToWrite = true;
         long stepMS = 0;
 
         if (statsTenToWrite) {
             for (int i = 0; i < 10; i++) {
                 long start = System.currentTimeMillis();
                 Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
-                mandelbrot.saveFileAsJpg(mandelbrot.I);
+                new FractalDesigner(mandelbrot).designFractal();
+                mandelbrot.saveFileAsJpg(mandelbrot.image);
                 long elapsed = System.currentTimeMillis() - start;
                 stepMS = stepMS + elapsed;
             }
@@ -95,7 +96,7 @@ public class MandelController {
                     DateFormat.SHORT);
             try {
                 FileWriter writer = new FileWriter("stats.md", true);
-                writer.write("Génération du fractal sur 10 runs *sans threads* par membre d'équipe: " + "\r\n");
+                writer.write("Génération du fractal sur 10 runs *avec threads* par membre d'équipe: " + "\r\n");
                 writer.close();
 
                 String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / 10;
@@ -104,10 +105,10 @@ public class MandelController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         } else {
             Mandelbrot mandelbrot = new Mandelbrot(zoom, posX, posY); // initialize at -250 and then user moves
-            mandelbrot.saveFileAsJpg(mandelbrot.I);
+            new FractalDesigner(mandelbrot).designFractal();
+            mandelbrot.saveFileAsJpg(mandelbrot.image);
         }
     }
 
