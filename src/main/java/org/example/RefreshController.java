@@ -9,14 +9,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class MandelController {
+public class RefreshController {
     final int pas = 100;
     double zoom = 5800; //200
     int posX = 2000; //400
     int posY = -2600; //-400
     private int side;
 
-    public MandelController(int side) {
+    public RefreshController(int side) {
         this.side = side;
     }
 
@@ -66,12 +66,15 @@ public class MandelController {
         }
     }
 
-    public byte[] mandelRefresh(String direction) throws IOException {
+    public byte[] fractalRefresh(String direction, String type) throws IOException {
         switchDirection(direction);
-        Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY);
+        System.out.println("fractal refresh");
+        Fractal fractal = fractalFactory(type);
+        System.out.println(type);
+
         byte[] response = null;
         try {
-            response = mandelbrot.getFractalFromBuffer();
+            response = fractal.getFractalFromBuffer();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -145,7 +148,7 @@ public class MandelController {
     public static void main(String[] args) {
         try {
             int side = 1000;
-            MandelController controller = new MandelController(side);
+            RefreshController controller = new RefreshController(side);
             int runs = 10;
 
             System.out.println("_without threading_");
@@ -155,6 +158,17 @@ public class MandelController {
             System.out.println("Stats OK");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Fractal fractalFactory(String name) {
+        switch (name) {
+            case "mandel" :
+                return new Mandelbrot(side, zoom, posX, posY);
+            case "julia" :
+                System.out.println("Julia ! ");
+                return new Julia();
+            default: return new Mandelbrot(side, zoom, posX, posY);
         }
     }
 

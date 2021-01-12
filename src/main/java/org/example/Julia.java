@@ -10,8 +10,14 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import static java.lang.System.out;
 
-public class Julia
+public class Julia extends Fractal
 {
+    final static String imagePath = "src/main/resources/static/img/julia.jpg";
+
+    public Julia() {
+       super("Julia Set",imagePath);
+    }
+
     public static void main(String args[])throws IOException
     {
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.
@@ -98,6 +104,21 @@ public class Julia
         }
         // Saving the image
         System.out.println("it is donerino");
-        ImageIO.write(img,"PNG", new File("src/main/resources/static/img/julia.jpg"));
+        ImageIO.write(img,"PNG", new File(imagePath));
+    }
+
+    @Override
+    int getSide() {
+        return 0;
+    }
+
+    @Override
+    BufferedImage getImage() {
+        return null;
+    }
+
+    @Override
+    void draw(int x, int y) {
+
     }
 }
