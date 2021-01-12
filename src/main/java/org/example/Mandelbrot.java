@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-public class Mandelbrot extends JFrame implements Fractal {
+public class Mandelbrot extends Fractal {
     private final int MAX_ITER = 5000;
     private final double ZOOM;
     public BufferedImage image;
@@ -21,7 +21,7 @@ public class Mandelbrot extends JFrame implements Fractal {
 
 
     public Mandelbrot(int side, double zoom, int posX, int posY) {
-        super("Mandelbrot Set");
+        super("Mandelbrot Set", IMAGE_MANDELBROT_PATH);
         ZOOM = zoom;
         this.posX = posX;
         this.posY = posY;
@@ -29,7 +29,6 @@ public class Mandelbrot extends JFrame implements Fractal {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.side = side;
-        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
     }
 
     public void generateImageWithoutThreading() {
@@ -54,17 +53,6 @@ public class Mandelbrot extends JFrame implements Fractal {
         image.setRGB(x, y, iter*BEAUTIFUL_COLORS);
     }
 
-    public static byte[] getFractalFromBuffer() throws IOException {
-        BufferedImage originalImage = ImageIO.read(new File(IMAGE_MANDELBROT_PATH));
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write( originalImage, "jpg", baos );
-        baos.flush();
-        byte[] imageInByte = baos.toByteArray();
-        baos.close();
-
-        return imageInByte;
-    }
-
     @Override
     public void paint(Graphics g) {
         g.drawImage(image, 0, 0, this);
@@ -79,7 +67,9 @@ public class Mandelbrot extends JFrame implements Fractal {
             e.printStackTrace();
         }
     }
-
+    public void makeImage() {
+        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
+    }
     public BufferedImage getImage() {
         return image;
     }
