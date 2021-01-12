@@ -10,6 +10,9 @@ import java.io.IOException;
 public abstract class Fractal extends JFrame {
 
     String imagePath;
+    public BufferedImage image;
+    public int side = 1000;
+
     abstract int getSide();
     abstract BufferedImage getImage();
     abstract void draw(int x, int y);
@@ -28,5 +31,19 @@ public abstract class Fractal extends JFrame {
         baos.close();
 
         return imageInByte;
+    }
+
+    public void makeImage() {
+        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
+    }
+
+    public void saveFileAsJpg(BufferedImage bufferedImage) {
+        try {
+            BufferedImage bi = bufferedImage;
+            File outputFile = new File(imagePath);
+            ImageIO.write(bi, "jpg", outputFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

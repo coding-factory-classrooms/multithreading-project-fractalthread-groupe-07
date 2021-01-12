@@ -11,14 +11,10 @@ import javax.swing.JFrame;
 public class Mandelbrot extends Fractal {
     private final int MAX_ITER = 5000;
     private final double ZOOM;
-    public BufferedImage image;
     private double zx, zy, cX, cY, tmp;
     private int posX, posY;
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
     private static final int BEAUTIFUL_COLORS = 6868;
-
-    private int side = 1000;
-
 
     public Mandelbrot(int side, double zoom, int posX, int posY) {
         super("Mandelbrot Set", IMAGE_MANDELBROT_PATH);
@@ -58,18 +54,6 @@ public class Mandelbrot extends Fractal {
         g.drawImage(image, 0, 0, this);
     }
 
-    public void saveFileAsJpg(BufferedImage bufferedImage) {
-        try {
-            BufferedImage bi = bufferedImage;
-            File outputFile = new File(IMAGE_MANDELBROT_PATH);
-            ImageIO.write(bi, "jpg", outputFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void makeImage() {
-        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
-    }
     public BufferedImage getImage() {
         return image;
     }

@@ -22,7 +22,8 @@ public class RefreshController {
 
     public String mandelInitialise() {
         try {
-            RenderImage(side,zoom, posX, posY);
+            Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY);
+            RenderImage(side,zoom, posX, posY,mandelbrot);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,7 +33,7 @@ public class RefreshController {
     public byte[] fractalRefresh(String direction, String type) throws IOException {
         System.out.println("fractal refresh");
         Fractal fractal = fractalFactory(type);
-        switchDirection(direction);
+        switchDirection(direction, fractal);
         byte[] response = null;
         try {
             response = fractal.getFractalFromBuffer();
@@ -42,11 +43,10 @@ public class RefreshController {
         return response;
     }
 
-    private static void RenderImage(int side, double zoom, int posX, int posY) throws IOException {
-        Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
-        mandelbrot.makeImage();
-        new FractalDesigner(mandelbrot).designFractal();
-        mandelbrot.saveFileAsJpg(mandelbrot.image);
+    private static void RenderImage(int side, double zoom, int posX, int posY, Fractal fractal) throws IOException {
+        fractal.makeImage();
+        new FractalDesigner(fractal).designFractal();
+        fractal.saveFileAsJpg(fractal.image);
     }
 
     public void writeStats(boolean withThreading, int runs, int side, double zoom, int posX, int posY) throws IOException {
@@ -133,39 +133,39 @@ public class RefreshController {
         }
     }
 
-    public void switchDirection(String direction) throws IOException {
+    public void switchDirection(String direction,Fractal fractal) throws IOException {
 
         switch (direction) {
             case "up" :
-                RenderImage(side, zoom, posX, posY-pas);
+                RenderImage(side, zoom, posX, posY-pas, fractal);
                 this.posY = posY-pas;
                 break;
             case "down" :
-                RenderImage(side, zoom, posX, posY+pas);
+                RenderImage(side, zoom, posX, posY+pas, fractal);
                 this.posY = posY+pas;
                 break;
             case "left" :
-                RenderImage(side, zoom, posX-pas, posY);
+                RenderImage(side, zoom, posX-pas, posY, fractal);
                 this.posX = posX-pas;
                 break;
             case "right" :
-                RenderImage(side, zoom, posX+pas, posY);
+                RenderImage(side, zoom, posX+pas, posY, fractal);
                 this.posX = posX+pas;
                 break;
             case "zoom" :
-                RenderImage(side,zoom+pas, posX, posY);
+                RenderImage(side,zoom+pas, posX, posY, fractal);
                 this.zoom = zoom+pas;
                 break;
             case "unzoom" :
                 if (zoom-pas < 0) {
                     break;
                 } else {
-                    RenderImage(side,zoom-pas, posX, posY);
+                    RenderImage(side,zoom-pas, posX, posY, fractal);
                     this.zoom = zoom-pas;
                 }
                 break;
             default:
-                RenderImage(side, zoom, posX, posY);
+                System.out.println("direction default");
                 break;
         }
     }
