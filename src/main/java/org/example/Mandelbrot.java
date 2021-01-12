@@ -16,8 +16,6 @@ public class Mandelbrot extends Fractal {
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
     private static final int BEAUTIFUL_COLORS = 6868;
 
-    private int verticalSide = 1000;
-    private int horizontalSide = 1000;
     public Mandelbrot(int verticalSide, int horizontalSide, double zoom, int posX, int posY) {
         super("Mandelbrot Set", IMAGE_MANDELBROT_PATH);
         ZOOM = zoom;
@@ -67,7 +65,7 @@ public class Mandelbrot extends Fractal {
         }
     }
     public void makeImage() {
-        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(verticalSide, horizontalSide, BufferedImage.TYPE_INT_RGB);
     }
     public BufferedImage getImage() {
         return image;

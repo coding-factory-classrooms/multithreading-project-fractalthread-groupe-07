@@ -11,12 +11,12 @@ public abstract class Fractal extends JFrame {
 
     String imagePath;
     public BufferedImage image;
-    public int side = 1000;
+    public int verticalSide = 1000;
+    public int horizontalSide = 1000;
 
-    abstract int getSide();
-    abstract BufferedImage getImage();
     abstract int getVerticalSide();
     abstract int getHorizontalSide();
+
     abstract void draw(int x, int y);
 
     public Fractal(String title, String imagePath) {
@@ -36,7 +36,7 @@ public abstract class Fractal extends JFrame {
     }
 
     public void makeImage() {
-        this.image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
+        this.image = new BufferedImage(verticalSide, horizontalSide, BufferedImage.TYPE_INT_RGB);
     }
 
     public void saveFileAsJpg(BufferedImage bufferedImage) {

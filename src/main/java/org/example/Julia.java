@@ -19,11 +19,6 @@ public class Julia extends Fractal
     }
 
     @Override
-    int getSide() {
-        return 1000;
-    }
-
-    @Override
     void draw(int x, int y) {
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.
         double WIDTH = 1000;
@@ -112,6 +107,21 @@ public class Julia extends Fractal
     }
     public BufferedImage getImage() {
         return image;
+    }
+    public int getHorizontalSide() {
+        return horizontalSide;
+    }
+
+    public void setHorizontalSide(int verticalSide) {
+        this.horizontalSide = verticalSide;
+    }
+
+    public int getVerticalSide() {
+        return verticalSide;
+    }
+
+    public void setVerticalSide(int horizontalSide) {
+        this.horizontalSide = horizontalSide;
     }
 
 }

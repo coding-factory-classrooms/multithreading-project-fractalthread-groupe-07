@@ -14,5 +14,5 @@ function setSides() {
     horizontalSide = document.getElementById('horizontal').value;
     return fetch('/setSides'+'?verticalSide='+verticalSide+'&horizontalSide='+horizontalSide)
     .then(response => response.blob())
-    .then(data => document.getElementById("mandelbrotImage").src=URL.createObjectURL(data));
+    .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
 }
