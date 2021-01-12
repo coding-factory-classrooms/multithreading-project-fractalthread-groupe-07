@@ -26,8 +26,8 @@ public class Julia extends Fractal
     @Override
     void draw(int x, int y) {
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.
-        double WIDTH = 500;
-        double HEIGHT = 500;
+        double WIDTH = 1000;
+        double HEIGHT = 1000;
         System.out.println("it is ");
 
         // Setting the Saturation of every pixel to maximum
@@ -39,9 +39,9 @@ public class Julia extends Fractal
 
         // Getting the constant ComplexNumber as input from the user for use in the function f(z) = z + c
         out.print("Re(c): -0.62772"); //-0.835 -0.2321 is cool too
-        double cReal = -0.835;  // cuz its stylé
+        double cReal = -0.62772;  // cuz its stylé
         out.print("Im(c): 0.42193i");
-        double cImag = -0.2321;
+        double cImag = 0.42193;
 
         // Creating the constant complex number from input real and imaginary values
         ComplexNumber constant = new ComplexNumber(cReal,cImag);

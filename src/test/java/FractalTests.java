@@ -28,5 +28,5 @@ public class FractalTests {
         // SUCH WOW!
         Assert.assertEquals(4, 2 + 2);
     }
-    
+
 }

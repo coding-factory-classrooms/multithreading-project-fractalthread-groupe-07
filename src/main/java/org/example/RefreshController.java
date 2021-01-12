@@ -161,7 +161,7 @@ public class RefreshController {
         try {
             FileWriter writer = new FileWriter("stats.md", true);
             writer.write("Total ELapsed Time:  " + elapsedTotal + " MS" + "\r\n");
-            writer.write("Génération du fractal de "+side+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
+            writer.write("Génération du fractal  de "+side+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
             writer.close();
 
             String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
