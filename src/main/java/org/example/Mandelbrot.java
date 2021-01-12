@@ -1,12 +1,6 @@
 package org.example;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
 public class Mandelbrot extends Fractal {
     private final int MAX_ITER = 5000;

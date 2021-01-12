@@ -40,23 +40,19 @@ public abstract class Fractal extends JFrame {
 
     public void saveFileAsJpg(BufferedImage bufferedImage) {
         try {
-            BufferedImage bi = bufferedImage;
             File outputFile = new File(this.imagePath);
-            ImageIO.write(bi, "jpg", outputFile);
+            ImageIO.write(bufferedImage, "jpg", outputFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public String getName() {
-        if (imagePath.equals("src/main/resources/static/img/mandelbrot.jpg")) {
-            return "mandel";
-        }
-        else if (imagePath.equals("src/main/resources/static/img/julia.jpg")) {
-            return "julia";
-        }
-        else
-            return "none";
+        return switch (imagePath) {
+            case "src/main/resources/static/img/mandelbrot.jpg" -> "mandel";
+            case "src/main/resources/static/img/julia.jpg" -> "julia";
+            default -> "none";
+        };
     }
 
     public BufferedImage getImage() {

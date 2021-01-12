@@ -12,12 +12,14 @@ import java.util.concurrent.Executors;
 
 public class FractalController {
     final int pas = 100;
-//    double zoom = 5800; //200
-//    int posX = 2000; //400
-//    int posY = -2600; //-400
-//    private int verticalSide;
-//    private int horizontalSide;
-    private Fractal fractal;
+/*
+    double zoom = 5800; //200
+    int posX = 2000; //400
+    int posY = -2600; //-400
+    private int verticalSide;
+    private int horizontalSide;
+*/
+private Fractal fractal;
 
     public String fractalControllerInitialise() {
         try {
@@ -46,21 +48,6 @@ public class FractalController {
         int coreNumber = Runtime.getRuntime().availableProcessors();
         new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
         fractal.saveFileAsJpg(fractal.getImage());
-    }
-
-
-    public static void saveTimeInFile(String timeToWrite) {
-        try {
-            FileWriter writer = new FileWriter("stats.md", true);
-
-            writer.write(System.getProperty("user.name") + " - " + timeToWrite + " " + "average" + " ms" + "\r\n");
-            writer.write("-------------------------------------------------------------------------");
-            writer.write("\r\n");
-
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public Fractal fractalFactory(String name) {
@@ -120,9 +107,6 @@ public class FractalController {
         RenderImage(fractal);
     }
 
-    /**
-     * Just for stats
-     */
     public static void main(String[] args) {
         try {
             int horizontalSide = 1000;
@@ -140,6 +124,9 @@ public class FractalController {
         }
     }
 
+    /**
+     * Just for stats
+     */
     public void writeStats(boolean withThreading, int runs, int verticalSide, int horizontalSide, double zoom, int posX, int posY) throws IOException {
         long stepMS = 0;
         long startTotal = System.currentTimeMillis();
@@ -176,6 +163,20 @@ public class FractalController {
             String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
 
             saveTimeInFile(dateAndTimeToSave);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveTimeInFile(String timeToWrite) {
+        try {
+            FileWriter writer = new FileWriter("stats.md", true);
+
+            writer.write(System.getProperty("user.name") + " - " + timeToWrite + " " + "average" + " ms" + "\r\n");
+            writer.write("-------------------------------------------------------------------------");
+            writer.write("\r\n");
+
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
