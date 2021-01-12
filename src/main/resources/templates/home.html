@@ -21,13 +21,10 @@
             <button id="down" value="down" onclick="getImage(this.value)" class="btn btn-primary solo">Bas</button>
         </div>
         <div class="row">
-            <form method="GET" action="javascript:setVerticalSide()">
+            <form method="GET" action="javascript:setSides()">
                 <label for="vertical">Vertical:</label>
                 <input type="text" id="vertical" name="verticalSide" required
                        minlength="0" maxlength="8" size="10">
-                <button type="submit"></button>
-            </form>
-            <form method="GET" action="javascript:setHorizontalSide()">
                 <label for="vertical">Horizontal:</label>
                 <input type="text" id="horizontal" name=horizontalSide" required
                        minlength="0" maxlength="8" size="10">

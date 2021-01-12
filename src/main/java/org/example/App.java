@@ -18,9 +18,7 @@ public class App {
 
         Spark.get("/", (req, res) -> mandelController.mandelInitialise());
         Spark.get("/getImage", (req, res) -> mandelController.mandelRefresh(req.queryParamOrDefault("direction",null)));
-        Spark.get("/setVerticalSide", (req, res) -> mandelController.mandelVerticalSizing(req.queryParamOrDefault("verticalSide", null)));
-        Spark.get("/setHorizontalSide", (req, res) -> mandelController.mandelHorizontalSizing(req.queryParamOrDefault("horizontalSide", null)));
-
+        Spark.get("/setSides", (req, res) -> mandelController.mandelSizing(req.queryParamOrDefault("verticalSide", null), req.queryParamOrDefault("horizontalSide", null)));
     }
 
     static void initialize() {
