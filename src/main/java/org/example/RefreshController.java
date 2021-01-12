@@ -29,49 +29,10 @@ public class RefreshController {
         return Template.render("home.html", new HashMap<>());
     }
 
-    public void switchDirection(String direction) throws IOException {
-
-        switch (direction) {
-            case "up" :
-                RenderImage(side, zoom, posX, posY-pas);
-                this.posY = posY-pas;
-                break;
-            case "down" :
-                RenderImage(side, zoom, posX, posY+pas);
-                this.posY = posY+pas;
-                break;
-            case "left" :
-                RenderImage(side, zoom, posX-pas, posY);
-                this.posX = posX-pas;
-                break;
-            case "right" :
-                RenderImage(side, zoom, posX+pas, posY);
-                this.posX = posX+pas;
-                break;
-            case "zoom" :
-                RenderImage(side,zoom+pas, posX, posY);
-                this.zoom = zoom+pas;
-                break;
-            case "unzoom" :
-                if (zoom-pas < 0) {
-                    break;
-                } else {
-                    RenderImage(side,zoom-pas, posX, posY);
-                    this.zoom = zoom-pas;
-                }
-                break;
-            default:
-                RenderImage(side, zoom, posX, posY);
-                break;
-        }
-    }
-
     public byte[] fractalRefresh(String direction, String type) throws IOException {
-        switchDirection(direction);
         System.out.println("fractal refresh");
         Fractal fractal = fractalFactory(type);
-        System.out.println(type);
-
+        switchDirection(direction);
         byte[] response = null;
         try {
             response = fractal.getFractalFromBuffer();
@@ -172,4 +133,40 @@ public class RefreshController {
         }
     }
 
+    public void switchDirection(String direction) throws IOException {
+
+        switch (direction) {
+            case "up" :
+                RenderImage(side, zoom, posX, posY-pas);
+                this.posY = posY-pas;
+                break;
+            case "down" :
+                RenderImage(side, zoom, posX, posY+pas);
+                this.posY = posY+pas;
+                break;
+            case "left" :
+                RenderImage(side, zoom, posX-pas, posY);
+                this.posX = posX-pas;
+                break;
+            case "right" :
+                RenderImage(side, zoom, posX+pas, posY);
+                this.posX = posX+pas;
+                break;
+            case "zoom" :
+                RenderImage(side,zoom+pas, posX, posY);
+                this.zoom = zoom+pas;
+                break;
+            case "unzoom" :
+                if (zoom-pas < 0) {
+                    break;
+                } else {
+                    RenderImage(side,zoom-pas, posX, posY);
+                    this.zoom = zoom-pas;
+                }
+                break;
+            default:
+                RenderImage(side, zoom, posX, posY);
+                break;
+        }
+    }
 }

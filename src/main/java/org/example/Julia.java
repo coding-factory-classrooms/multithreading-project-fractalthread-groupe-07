@@ -21,8 +21,8 @@ public class Julia extends Fractal
     public static void main(String args[])throws IOException
     {
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.
-        double WIDTH = 200;
-        double HEIGHT = 200;
+        double WIDTH = 1000;
+        double HEIGHT = 1000;
         System.out.println("it is ");
 
         // Setting the Saturation of every pixel to maximum
@@ -45,7 +45,7 @@ public class Julia extends Fractal
         // Setting the maximum iterations to 256. This can be increased if you suspect an escapee set may be found beyond this value.
         // Increasing or decreasing the value will affect computation time.
 
-        int max_iter = 250;
+        int max_iter = 256;
 
         // Looping through every pixel of image
         for(int X=0; X<WIDTH; X++)
