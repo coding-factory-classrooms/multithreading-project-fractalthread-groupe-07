@@ -14,12 +14,6 @@ public class FractalDesigner {
     }
 
     public void designFractal () {
-        // à mettre en amont
-        int coreNumber = Runtime.getRuntime().availableProcessors();
-        threadPool = //new OurThreadPoolExecutor(coreNumber);
-        Executors.newFixedThreadPool(coreNumber);
-        // end amont
-
         int linesByChunk = 100;
 
         FractalTask.setFractal(fractal);
