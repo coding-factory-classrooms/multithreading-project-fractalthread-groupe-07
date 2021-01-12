@@ -18,11 +18,16 @@ public class Julia extends Fractal
        super("Julia Set",imagePath);
     }
 
-    public static void main(String args[])throws IOException
-    {
+    @Override
+    int getSide() {
+        return 1000;
+    }
+
+    @Override
+    void draw(int x, int y) {
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.
-        double WIDTH = 200;
-        double HEIGHT = 200;
+        double WIDTH = 1000;
+        double HEIGHT = 1000;
         System.out.println("it is ");
 
         // Setting the Saturation of every pixel to maximum
@@ -31,13 +36,12 @@ public class Julia extends Fractal
 
         // Creating a new blank RGB Image to draw the fractal on
         BufferedImage img = new BufferedImage((int)WIDTH, (int)HEIGHT,BufferedImage.TYPE_3BYTE_BGR);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // Getting the constant ComplexNumber as input from the user for use in the function f(z) = z + c
         out.print("Re(c): -0.62772"); //-0.835 -0.2321 is cool too
-        double cReal = -0.835;  // cuz its stylé
+        double cReal = -0.62772;  // cuz its stylé
         out.print("Im(c): 0.42193i");
-        double cImag = -0.2321;
+        double cImag = 0.42193;
 
         // Creating the constant complex number from input real and imaginary values
         ComplexNumber constant = new ComplexNumber(cReal,cImag);
@@ -45,16 +49,16 @@ public class Julia extends Fractal
         // Setting the maximum iterations to 256. This can be increased if you suspect an escapee set may be found beyond this value.
         // Increasing or decreasing the value will affect computation time.
 
-        int max_iter = 250;
+        int max_iter = 256;
 
         // Looping through every pixel of image
         for(int X=0; X<WIDTH; X++)
         {
-            System.out.println("it is widg");
+            //System.out.println("it is widg");
 
             for(int Y=0; Y<HEIGHT; Y++)
             {
-                System.out.println("it is heig");
+                //System.out.println("it is heig");
 
                 // Creating an empty complex number to hold the value of last z
                 ComplexNumber oldz = new ComplexNumber();
@@ -100,25 +104,14 @@ public class Julia extends Fractal
                 // Creating the color from HSB values and setting the pixel to the computed color
                 Color color = Color.getHSBColor(Hue, Saturation, Brightness);
                 img.setRGB(X,Y,color.getRGB());
+                image = img;
             }
         }
         // Saving the image
         System.out.println("it is donerino");
-        ImageIO.write(img,"PNG", new File(imagePath));
+    }
+    public BufferedImage getImage() {
+        return image;
     }
 
-    @Override
-    int getSide() {
-        return 0;
-    }
-
-    @Override
-    BufferedImage getImage() {
-        return null;
-    }
-
-    @Override
-    void draw(int x, int y) {
-
-    }
 }

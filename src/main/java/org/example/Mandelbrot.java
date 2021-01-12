@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 public class Mandelbrot extends Fractal {
     private final int MAX_ITER = 5000;
     private final double ZOOM;
-    public BufferedImage image;
     private double zx, zy, cX, cY, tmp;
     private int posX, posY;
     private static final String IMAGE_MANDELBROT_PATH = "src/main/resources/static/img/mandelbrot.jpg";
@@ -19,8 +18,6 @@ public class Mandelbrot extends Fractal {
 
     private int verticalSide = 1000;
     private int horizontalSide = 1000;
-
-
     public Mandelbrot(int verticalSide, int horizontalSide, double zoom, int posX, int posY) {
         super("Mandelbrot Set", IMAGE_MANDELBROT_PATH);
         ZOOM = zoom;
