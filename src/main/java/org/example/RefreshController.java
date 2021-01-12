@@ -45,6 +45,7 @@ public class RefreshController {
     }
 
     private static void RenderImage(Fractal fractal) throws IOException {
+
         fractal.makeImage();
         new FractalDesigner(fractal).designFractal();
         fractal.saveFileAsJpg(fractal.image);
@@ -79,31 +80,32 @@ public class RefreshController {
 
         switch (direction) {
             case "up" :
-                RenderImage(fractal);
                 this.posY = posY-pas;
+                RenderImage(fractal);
                 break;
             case "down" :
-                RenderImage(fractal);
                 this.posY = posY+pas;
+                RenderImage(fractal);
+
                 break;
             case "left" :
-                RenderImage(fractal);
                 this.posX = posX-pas;
+                RenderImage(fractal);
                 break;
             case "right" :
-                RenderImage(fractal);
                 this.posX = posX+pas;
+                RenderImage(fractal);
                 break;
             case "zoom" :
-                RenderImage(fractal);
                 this.zoom = zoom+pas;
+                RenderImage(fractal);
                 break;
             case "unzoom" :
                 if (zoom-pas < 0) {
                     break;
                 } else {
-                    RenderImage(fractal);
                     this.zoom = zoom-pas;
+                    RenderImage(fractal);
                 }
                 break;
             default:
