@@ -54,10 +54,6 @@ public class Mandelbrot extends Fractal {
         g.drawImage(image, 0, 0, this);
     }
 
-    public BufferedImage getImage() {
-        return image;
-    }
-
     public int getSide() {
         return side;
     }

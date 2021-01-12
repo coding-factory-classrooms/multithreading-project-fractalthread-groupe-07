@@ -23,7 +23,7 @@ public class RefreshController {
     public String mandelInitialise() {
         try {
             Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY);
-            RenderImage(side,zoom, posX, posY,mandelbrot);
+            RenderImage(mandelbrot);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,6 +31,7 @@ public class RefreshController {
     }
 
     public byte[] fractalRefresh(String direction, String type) throws IOException {
+
         System.out.println("fractal refresh");
         Fractal fractal = fractalFactory(type);
         switchDirection(direction, fractal);
@@ -43,50 +44,10 @@ public class RefreshController {
         return response;
     }
 
-    private static void RenderImage(int side, double zoom, int posX, int posY, Fractal fractal) throws IOException {
+    private static void RenderImage(Fractal fractal) throws IOException {
         fractal.makeImage();
         new FractalDesigner(fractal).designFractal();
         fractal.saveFileAsJpg(fractal.image);
-    }
-
-    public void writeStats(boolean withThreading, int runs, int side, double zoom, int posX, int posY) throws IOException {
-            long stepMS = 0;
-            long startTotal = System.currentTimeMillis();
-            for (int i = 0; i < runs; i++) {
-                long start = System.currentTimeMillis();
-                Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
-                mandelbrot.makeImage();
-                if (withThreading) {
-                    new FractalDesigner(mandelbrot).designFractal();
-                } else {
-                    mandelbrot.generateImageWithoutThreading();
-                }
-                mandelbrot.saveFileAsJpg(mandelbrot.image);
-                long elapsed = System.currentTimeMillis() - start;
-                stepMS = stepMS + elapsed;
-
-                FileWriter writer = new FileWriter("stats.md", true);
-                writer.write("multithread: " + String.valueOf(withThreading).toUpperCase(Locale.ROOT) + " Run " + i + " sur " + runs +" avec un fractal de "+side + "px sur " +  "TPS " + elapsed + "MS"+ "\r\n");
-                writer.close();
-            }
-            long elapsedTotal = System.currentTimeMillis() - startTotal;
-
-            Date dateNow = new Date();
-            DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
-                    DateFormat.MEDIUM,
-                    DateFormat.SHORT);
-            try {
-                FileWriter writer = new FileWriter("stats.md", true);
-                writer.write("Total ELapsed Time:  " + elapsedTotal + " MS" + "\r\n");
-                writer.write("Génération du fractal de "+side+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
-                writer.close();
-
-                String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
-
-                saveTimeInFile(dateAndTimeToSave);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
     }
 
     public static void saveTimeInFile(String timeToWrite) {
@@ -100,6 +61,55 @@ public class RefreshController {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Fractal fractalFactory(String name) {
+        switch (name) {
+            case "mandel" :
+                return new Mandelbrot(side, zoom, posX, posY);
+            case "julia" :
+                System.out.println("Julia ! ");
+                return new Julia();
+            default: return new Mandelbrot(side, zoom, posX, posY);
+        }
+    }
+
+    public void switchDirection(String direction,Fractal fractal) throws IOException {
+
+        switch (direction) {
+            case "up" :
+                RenderImage(fractal);
+                this.posY = posY-pas;
+                break;
+            case "down" :
+                RenderImage(fractal);
+                this.posY = posY+pas;
+                break;
+            case "left" :
+                RenderImage(fractal);
+                this.posX = posX-pas;
+                break;
+            case "right" :
+                RenderImage(fractal);
+                this.posX = posX+pas;
+                break;
+            case "zoom" :
+                RenderImage(fractal);
+                this.zoom = zoom+pas;
+                break;
+            case "unzoom" :
+                if (zoom-pas < 0) {
+                    break;
+                } else {
+                    RenderImage(fractal);
+                    this.zoom = zoom-pas;
+                }
+                break;
+            default:
+                RenderImage(fractal);
+                System.out.println("direction default");
+                break;
         }
     }
 
@@ -122,51 +132,43 @@ public class RefreshController {
         }
     }
 
-    public Fractal fractalFactory(String name) {
-        switch (name) {
-            case "mandel" :
-                return new Mandelbrot(side, zoom, posX, posY);
-            case "julia" :
-                System.out.println("Julia ! ");
-                return new Julia();
-            default: return new Mandelbrot(side, zoom, posX, posY);
+    public void writeStats(boolean withThreading, int runs, int side, double zoom, int posX, int posY) throws IOException {
+        long stepMS = 0;
+        long startTotal = System.currentTimeMillis();
+        for (int i = 0; i < runs; i++) {
+            long start = System.currentTimeMillis();
+            Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
+            mandelbrot.makeImage();
+            if (withThreading) {
+                new FractalDesigner(mandelbrot).designFractal();
+            } else {
+                mandelbrot.generateImageWithoutThreading();
+            }
+            mandelbrot.saveFileAsJpg(mandelbrot.image);
+            long elapsed = System.currentTimeMillis() - start;
+            stepMS = stepMS + elapsed;
+
+            FileWriter writer = new FileWriter("stats.md", true);
+            writer.write("multithread: " + String.valueOf(withThreading).toUpperCase(Locale.ROOT) + " Run " + i + " sur " + runs +" avec un fractal de "+side + "px sur " +  "TPS " + elapsed + "MS"+ "\r\n");
+            writer.close();
         }
-    }
+        long elapsedTotal = System.currentTimeMillis() - startTotal;
 
-    public void switchDirection(String direction,Fractal fractal) throws IOException {
+        Date dateNow = new Date();
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+                DateFormat.MEDIUM,
+                DateFormat.SHORT);
+        try {
+            FileWriter writer = new FileWriter("stats.md", true);
+            writer.write("Total ELapsed Time:  " + elapsedTotal + " MS" + "\r\n");
+            writer.write("Génération du fractal de "+side+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
+            writer.close();
 
-        switch (direction) {
-            case "up" :
-                RenderImage(side, zoom, posX, posY-pas, fractal);
-                this.posY = posY-pas;
-                break;
-            case "down" :
-                RenderImage(side, zoom, posX, posY+pas, fractal);
-                this.posY = posY+pas;
-                break;
-            case "left" :
-                RenderImage(side, zoom, posX-pas, posY, fractal);
-                this.posX = posX-pas;
-                break;
-            case "right" :
-                RenderImage(side, zoom, posX+pas, posY, fractal);
-                this.posX = posX+pas;
-                break;
-            case "zoom" :
-                RenderImage(side,zoom+pas, posX, posY, fractal);
-                this.zoom = zoom+pas;
-                break;
-            case "unzoom" :
-                if (zoom-pas < 0) {
-                    break;
-                } else {
-                    RenderImage(side,zoom-pas, posX, posY, fractal);
-                    this.zoom = zoom-pas;
-                }
-                break;
-            default:
-                System.out.println("direction default");
-                break;
+            String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
+
+            saveTimeInFile(dateAndTimeToSave);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

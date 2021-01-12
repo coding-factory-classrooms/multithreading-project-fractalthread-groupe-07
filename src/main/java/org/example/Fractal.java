@@ -14,7 +14,6 @@ public abstract class Fractal extends JFrame {
     public int side = 1000;
 
     abstract int getSide();
-    abstract BufferedImage getImage();
     abstract void draw(int x, int y);
 
     public Fractal(String title, String imagePath) {
@@ -34,7 +33,7 @@ public abstract class Fractal extends JFrame {
     }
 
     public void makeImage() {
-        image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
+        this.image = new BufferedImage(side, side, BufferedImage.TYPE_INT_RGB);
     }
 
     public void saveFileAsJpg(BufferedImage bufferedImage) {
@@ -45,5 +44,20 @@ public abstract class Fractal extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getName() {
+        if (imagePath.equals("src/main/resources/static/img/mandelbrot.jpg")) {
+            return "mandel";
+        }
+        else if (imagePath.equals("src/main/resources/static/img/julia.jpg")) {
+            return "julia";
+        }
+        else
+            return "none";
+    }
+
+    public BufferedImage getImage() {
+        return image;
     }
 }
