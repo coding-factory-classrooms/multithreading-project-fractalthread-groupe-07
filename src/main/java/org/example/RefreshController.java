@@ -97,8 +97,9 @@ public class RefreshController {
                 long start = System.currentTimeMillis();
                 Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
                 mandelbrot.makeImage();
+                int coreNumber = Runtime.getRuntime().availableProcessors();
                 if (withThreading) {
-                    new FractalDesigner(mandelbrot).designFractal();
+                    new FractalDesigner(mandelbrot, Executors.newFixedThreadPool(coreNumber)).designFractal();
                 } else {
                     mandelbrot.generateImageWithoutThreading();
                 }
