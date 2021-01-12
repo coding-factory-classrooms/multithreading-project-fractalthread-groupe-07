@@ -68,8 +68,38 @@ public class MandelController {
         }
     }
 
+    public void verticalResize(String verticalSide) throws IOException {
+        RenderImage(Integer.parseInt(verticalSide), horizontalSide, zoom, posX, posY);
+    }
+
+    public void horizontalResize(String horizontalSide) throws IOException {
+        RenderImage(verticalSide, Integer.parseInt(horizontalSide), zoom, posX, posY);
+    }
+
     public byte[] mandelRefresh(String direction) throws IOException {
         switchDirection(direction);
+        byte[] response = null;
+        try {
+            response = Mandelbrot.getFractalFromBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public byte[] mandelVerticalSizing(String verticalSide) throws IOException {
+        verticalResize(verticalSide);
+        byte[] response = null;
+        try {
+            response = Mandelbrot.getFractalFromBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public byte[] mandelHorizontalSizing(String horizontalSide) throws IOException {
+        horizontalResize(horizontalSide);
         byte[] response = null;
         try {
             response = Mandelbrot.getFractalFromBuffer();
