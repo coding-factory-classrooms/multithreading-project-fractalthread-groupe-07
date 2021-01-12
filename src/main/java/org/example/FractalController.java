@@ -10,24 +10,19 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.Executors;
 
-public class RefreshController {
+public class FractalController {
     final int pas = 100;
-    double zoom = 5800; //200
-    int posX = 2000; //400
-    int posY = -2600; //-400
-    private int verticalSide;
-    private int horizontalSide;
+//    double zoom = 5800; //200
+//    int posX = 2000; //400
+//    int posY = -2600; //-400
+//    private int verticalSide;
+//    private int horizontalSide;
+    private Fractal fractal;
 
-
-    public RefreshController(int verticalSide, int horizontalSide) {
-        this.verticalSide = verticalSide;
-        this.horizontalSide = horizontalSide;
-    }
-
-    public String mandelInitialise() {
+    public String fractalControllerInitialise() {
         try {
-            Mandelbrot mandelbrot = new Mandelbrot(verticalSide, horizontalSide, zoom, posX, posY);
-            RenderImage(mandelbrot);
+            fractal = new Mandelbrot();
+            RenderImage(fractal);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,9 +30,7 @@ public class RefreshController {
     }
 
     public byte[] fractalRefresh(String direction, String type) throws IOException {
-
-        System.out.println("fractal refresh");
-        Fractal fractal = fractalFactory(type,horizontalSide,verticalSide);
+        fractal = fractalFactory(type);
         switchDirection(direction, fractal);
         byte[] response = null;
         try {
@@ -49,11 +42,10 @@ public class RefreshController {
     }
 
     private static void RenderImage(Fractal fractal) throws IOException {
-
         fractal.makeImage();
         int coreNumber = Runtime.getRuntime().availableProcessors();
         new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
-        fractal.saveFileAsJpg(fractal.image);
+        fractal.saveFileAsJpg(fractal.getImage());
     }
 
 
@@ -71,21 +63,20 @@ public class RefreshController {
         }
     }
 
-    public Fractal fractalFactory(String name,int verticalSide,int horizontalSide) {
+    public Fractal fractalFactory(String name) {
         switch (name) {
             case "mandel" :
-                return new Mandelbrot(verticalSide,horizontalSide, zoom, posX, posY);
+                return new Mandelbrot();
             case "julia" :
                 System.out.println("Julia ! ");
                 return new Julia();
-            default: return new Mandelbrot(verticalSide,horizontalSide, zoom, posX, posY);
+            default: return new Mandelbrot();
         }
     }
 
     public byte[] fractalSizing(String verticalSide, String horizontalSide) throws IOException {
-        Fractal fractal = fractalFactory("mandel",
-                Integer.parseInt(verticalSide),Integer.parseInt(horizontalSide)); // type en dur pr le mom
-        resize(verticalSide,horizontalSide,fractal);
+        resize(verticalSide,horizontalSide);
+        RenderImage(fractal);
         byte[] response = null;
         try {
             response = fractal.getFractalFromBuffer();
@@ -95,47 +86,38 @@ public class RefreshController {
         return response;
     }
 
-    public void resize(String verticalSide, String horizontalSide,Fractal fractal) throws IOException {
-        RenderImage(fractal);
+    public void resize(String verticalSide, String horizontalSide) throws IOException {
+        fractal.setVerticalSide(Integer.parseInt(verticalSide));
+        fractal.setHorizontalSide(Integer.parseInt(horizontalSide));
     }
 
     public void switchDirection(String direction,Fractal fractal) throws IOException {
 
         switch (direction) {
             case "up" :
-                this.posY = posY-pas;
-                RenderImage(fractal);
+                this.fractal.setPosY(this.fractal.getPosY()-pas);
                 break;
             case "down" :
-                this.posY = posY+pas;
-                RenderImage(fractal);
-
+                this.fractal.setPosY(this.fractal.getPosY()+pas);
                 break;
             case "left" :
-                this.posX = posX-pas;
-                RenderImage(fractal);
+                this.fractal.setPosX(this.fractal.getPosX()-pas);
                 break;
             case "right" :
-                this.posX = posX+pas;
-                RenderImage(fractal);
+                this.fractal.setPosX(this.fractal.getPosX()+pas);
                 break;
             case "zoom" :
-                this.zoom = zoom+pas;
-                RenderImage(fractal);
+                this.fractal.setZoom(this.fractal.getZoom()+pas);
                 break;
             case "unzoom" :
-                if (zoom-pas < 0) {
+                if (this.fractal.getZoom()-pas < 0) {
                     break;
                 } else {
-                    this.zoom = zoom-pas;
-                    RenderImage(fractal);
+                    this.fractal.setZoom(this.fractal.getZoom()-pas);
                 }
                 break;
-            default:
-                RenderImage(fractal);
-                System.out.println("direction default");
-                break;
         }
+        RenderImage(fractal);
     }
 
     /**
@@ -145,7 +127,7 @@ public class RefreshController {
         try {
             int horizontalSide = 1000;
             int verticalSide = 1000;
-            RefreshController controller = new RefreshController(verticalSide,horizontalSide);
+            FractalController controller = new FractalController();
             int runs = 10;
 
             System.out.println("_without threading_");
@@ -171,7 +153,7 @@ public class RefreshController {
             } else {
                 mandelbrot.generateImageWithoutThreading();
             }
-            mandelbrot.saveFileAsJpg(mandelbrot.image);
+            mandelbrot.saveFileAsJpg(mandelbrot.getImage());
             long elapsed = System.currentTimeMillis() - start;
             stepMS = stepMS + elapsed;
 

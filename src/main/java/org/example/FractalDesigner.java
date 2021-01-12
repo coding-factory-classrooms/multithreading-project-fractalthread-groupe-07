@@ -14,7 +14,6 @@ public class FractalDesigner {
     }
 
     public void designFractal () {
-
         if (fractal.getName().equals("mandel")) {
             int coreNumber = Runtime.getRuntime().availableProcessors();
             ExecutorService threadPool = Executors.newFixedThreadPool(coreNumber);

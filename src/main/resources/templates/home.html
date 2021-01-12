@@ -10,7 +10,7 @@
             <button id="top" value="up" onclick="getImage(this.value)" class="btn btn-primary solo">Haut</button>
         </div>
         <div class="row">
-            <div class="col-4"></div>  <!--  déso c dégueu mé ca marc :3  -->
+            <div class="col-4"></div>
             <button id="left " value="left" onclick="getImage(this.value)" class="btn btn-primary gauche">Gauche</button>
             <button id="unzoom" value="unzoom" onclick="getImage(this.value)" class="btn btn-primary">Unzoom</button>
             <button id="zoom" value="zoom" onclick="getImage(this.value)" class="btn btn-primary">Zoom</button>
@@ -23,15 +23,17 @@
         <div class="row">
             <button id="juliaBtn" onclick="getJulia()" class="btn btn-primary solo">Julia !</button>
         </div>
-        <div class="row">
-            <form method="GET" action="javascript:setSides()">
+        <div>
+
+            <form style="text-align: center" method="GET" action="javascript:setSides()">
                 <label for="vertical">Vertical:</label>
                 <input type="text" id="vertical" name="verticalSide" required
                        minlength="0" maxlength="8" size="10">
                 <label for="vertical">Horizontal:</label>
                 <input type="text" id="horizontal" name=horizontalSide" required
                        minlength="0" maxlength="8" size="10">
-                <button type="submit"></button>
+                <br/>
+                <button type="submit" class="btn btn-primary">Redimensionner</button>
             </form>
         </div>
     </div>

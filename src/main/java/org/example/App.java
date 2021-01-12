@@ -5,20 +5,17 @@ import org.example.core.Template;
 import org.example.middlewares.LoggerMiddleware;
 import spark.Spark;
 
-import java.io.InputStreamReader;
-import java.util.HashMap;
-
 public class App {
     public static void main(String[] args) {
         initialize();
 
         int verticalSide = 1000;
         int horizontalSide = 1000;
-        RefreshController refreshController = new RefreshController(verticalSide, horizontalSide);
+        FractalController fractalController = new FractalController();
 
-        Spark.get("/", (req, res) -> refreshController.mandelInitialise());
-        Spark.get("/getImage", (req, res) -> refreshController.fractalRefresh(req.queryParamOrDefault("direction",null),req.queryParamOrDefault("type",null)));
-        Spark.get("/setSides", (req, res) -> refreshController.fractalSizing(req.queryParamOrDefault("verticalSide", null), req.queryParamOrDefault("horizontalSide", null)));
+        Spark.get("/", (req, res) -> fractalController.fractalControllerInitialise());
+        Spark.get("/getImage", (req, res) -> fractalController.fractalRefresh(req.queryParamOrDefault("direction",null),req.queryParamOrDefault("type",null)));
+        Spark.get("/setSides", (req, res) -> fractalController.fractalSizing(req.queryParamOrDefault("verticalSide", null), req.queryParamOrDefault("horizontalSide", null)));
     }
 
     static void initialize() {

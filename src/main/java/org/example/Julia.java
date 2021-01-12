@@ -99,29 +99,10 @@ public class Julia extends Fractal
                 // Creating the color from HSB values and setting the pixel to the computed color
                 Color color = Color.getHSBColor(Hue, Saturation, Brightness);
                 img.setRGB(X,Y,color.getRGB());
-                image = img;
+                setImage(img);
             }
         }
         // Saving the image
         System.out.println("it is donerino");
     }
-    public BufferedImage getImage() {
-        return image;
-    }
-    public int getHorizontalSide() {
-        return horizontalSide;
-    }
-
-    public void setHorizontalSide(int verticalSide) {
-        this.horizontalSide = verticalSide;
-    }
-
-    public int getVerticalSide() {
-        return verticalSide;
-    }
-
-    public void setVerticalSide(int horizontalSide) {
-        this.horizontalSide = horizontalSide;
-    }
-
 }

@@ -8,14 +8,13 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Fractal extends JFrame {
-
-    String imagePath;
-    public BufferedImage image;
-    public int verticalSide = 1000;
-    public int horizontalSide = 1000;
-
-    abstract int getVerticalSide();
-    abstract int getHorizontalSide();
+    private String imagePath;
+    private BufferedImage image;
+    private int verticalSide = 1000;
+    private int horizontalSide = 1000;
+    private double zoom = 5000;
+    private int posX = 2000;
+    private int posY = -2600;
 
     abstract void draw(int x, int y);
 
@@ -42,7 +41,7 @@ public abstract class Fractal extends JFrame {
     public void saveFileAsJpg(BufferedImage bufferedImage) {
         try {
             BufferedImage bi = bufferedImage;
-            File outputFile = new File(imagePath);
+            File outputFile = new File(this.imagePath);
             ImageIO.write(bi, "jpg", outputFile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,5 +61,55 @@ public abstract class Fractal extends JFrame {
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    public void setVerticalSide(int verticalSide) {
+        this.verticalSide = verticalSide;
+    }
+
+    public void setHorizontalSide(int horizontalSide) {
+        this.horizontalSide = horizontalSide;
+    }
+
+    public double getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(double zoom) {
+        this.zoom = zoom;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+    public int getVerticalSide() {
+        return this.verticalSide;
+    }
+    public int getHorizontalSide() {
+        return this.horizontalSide;
     }
 }
