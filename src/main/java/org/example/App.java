@@ -12,12 +12,13 @@ public class App {
     public static void main(String[] args) {
         initialize();
 
-        int basicSide = 1000;
-        RefreshController refreshController = new RefreshController(basicSide);
+        int verticalSide = 1000;
+        int horizontalSide = 1000;
+        MandelController mandelController = new MandelController(verticalSide, horizontalSide);
 
-        Spark.get("/", (req, res) -> refreshController.mandelInitialise());
-        Spark.get("/getImage", (req, res) -> refreshController.fractalRefresh(req.queryParamOrDefault("direction",null),
-                req.queryParamOrDefault("type","null")));
+        Spark.get("/", (req, res) -> mandelController.mandelInitialise());
+        Spark.get("/getImage", (req, res) -> mandelController.mandelRefresh(req.queryParamOrDefault("direction",null)));
+        Spark.get("/setSides", (req, res) -> mandelController.mandelSizing(req.queryParamOrDefault("verticalSide", null), req.queryParamOrDefault("horizontalSide", null)));
     }
 
     static void initialize() {

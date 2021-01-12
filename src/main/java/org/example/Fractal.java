@@ -12,6 +12,8 @@ public abstract class Fractal extends JFrame {
     String imagePath;
     abstract int getSide();
     abstract BufferedImage getImage();
+    abstract int getVerticalSide();
+    abstract int getHorizontalSide();
     abstract void draw(int x, int y);
 
     public Fractal(String title, String imagePath) {
