@@ -5,8 +5,14 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OurThreadPoolExecutor extends AbstractExecutorService {
+    // runState is stored in the high-order bits
+//    private static final int RUNNING    = -1 << COUNT_BITS;
+//    private static final int SHUTDOWN   =  0 << COUNT_BITS;
+//    private static final int STOP       =  1 << COUNT_BITS;
+//    private static final int TIDYING    =  2 << COUNT_BITS;
+//    private static final int TERMINATED =  3 << COUNT_BITS;
     private volatile int corePoolSize;
-    private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+//    private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 
 //    public ThreadPoolExecutor(int corePoolSize,
 //                              int maximumPoolSize,
@@ -92,21 +98,24 @@ public class OurThreadPoolExecutor extends AbstractExecutorService {
          * thread.  If it fails, we know we are shut down or saturated
          * and so reject the task.
          */
-        int c = ctl.get();
-        if (workerCountOf(c) < corePoolSize) {
-            if (addWorker(command, true))
-                return;
-            c = ctl.get();
-        }
-        if (isRunning(c) && workQueue.offer(command)) {
-            int recheck = ctl.get();
-            if (! isRunning(recheck) && remove(command))
-                reject(command);
-            else if (workerCountOf(recheck) == 0)
-                addWorker(null, false);
-        }
-        else if (!addWorker(command, false))
-            reject(command);
+        //int c = ctl.get();
+//        if (workerCountOf(c) < corePoolSize) {
+//            if (addWorker(command, true))
+//                return;
+//            c = ctl.get();
+//        }
+//        if (isRunning(c) && workQueue.offer(command)) {
+//            int recheck = ctl.get();
+//            if (! isRunning(recheck) && remove(command))
+//                reject(command);
+//            else if (workerCountOf(recheck) == 0)
+//                addWorker(null, false);
+//        }
+//        else if (!addWorker(command, false))
+//            reject(command);
 
     }
+
+//    private boolean workerCountOf(int c) {
+//    }
 }

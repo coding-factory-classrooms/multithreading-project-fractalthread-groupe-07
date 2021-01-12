@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.Executors;
 
 public class RefreshController {
     final int pas = 100;
@@ -84,7 +85,8 @@ public class RefreshController {
     private static void RenderImage(int side, double zoom, int posX, int posY) throws IOException {
         Mandelbrot mandelbrot = new Mandelbrot(side, zoom, posX, posY); // initialize at -250 and then user moves
         mandelbrot.makeImage();
-        new FractalDesigner(mandelbrot).designFractal();
+        int coreNumber = Runtime.getRuntime().availableProcessors();
+        new FractalDesigner(mandelbrot, Executors.newFixedThreadPool(coreNumber)).designFractal();
         mandelbrot.saveFileAsJpg(mandelbrot.image);
     }
 

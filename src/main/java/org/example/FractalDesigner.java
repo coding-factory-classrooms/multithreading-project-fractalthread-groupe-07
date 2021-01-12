@@ -7,14 +7,18 @@ import java.util.concurrent.TimeUnit;
 
 public class FractalDesigner {
     private Fractal fractal;
-    public FractalDesigner(Fractal fractal) {
+    private ExecutorService threadPool;
+    public FractalDesigner(Fractal fractal, ExecutorService threadPool) {
         this.fractal = fractal;
+        this.threadPool = threadPool;
     }
 
     public void designFractal () {
+        // à mettre en amont
         int coreNumber = Runtime.getRuntime().availableProcessors();
-        ExecutorService threadPool = //new OurThreadPoolExecutor(coreNumber);
+        threadPool = //new OurThreadPoolExecutor(coreNumber);
         Executors.newFixedThreadPool(coreNumber);
+        // end amont
 
         int linesByChunk = 100;
 
