@@ -28,8 +28,8 @@ public class Julia extends Fractal
     @Override
     void draw(int x, int y, int fractionId, BufferedImage image) {
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.
-        double WIDTH = 1000;
-        double HEIGHT = 1000;
+        double WIDTH = getHorizontalSide();
+        double HEIGHT = getVerticalSide();
         System.out.println("it is ");
 
         // Setting the Saturation of every pixel to maximum

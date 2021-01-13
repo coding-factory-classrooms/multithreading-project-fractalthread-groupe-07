@@ -22,7 +22,14 @@ function getImage(direction) {
 function setSides() {
     verticalSide = document.getElementById('vertical').value;
     horizontalSide = document.getElementById('horizontal').value;
-    return fetch('/setSides'+'?verticalSide='+verticalSide+'&horizontalSide='+horizontalSide)
-    .then(response => response.blob())
-    .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+    if(isJulia) {
+     return fetch('/setSides'+'?verticalSide='+verticalSide+'&horizontalSide='+horizontalSide+'&type=julia')
+        .then(response => response.blob())
+        .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+    }
+    else {
+    return fetch('/setSides'+'?verticalSide='+verticalSide+'&horizontalSide='+horizontalSide+'&type=mandel')
+        .then(response => response.blob())
+        .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+        }
 }
