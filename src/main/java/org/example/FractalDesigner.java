@@ -17,18 +17,11 @@ public class FractalDesigner {
 
     public void designFractal () {
         if (fractal.getName().equals("mandel")) {
-            int wantedChunks = 10;
+            int wantedChunks = 100;
             int linesByChunk = fractal.getHorizontalSide()/wantedChunks;
             createFractions(linesByChunk);
             threadPool.shutdown();
             mergeFractions();
-
-
-//            try {
-//                threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         }
         else {
             System.out.println("draw julia");
@@ -46,7 +39,7 @@ public class FractalDesigner {
         Graphics g = fractal.getImage().getGraphics();
         try {
             for (int i = 0; i < futures.size(); i++) {
-                g.drawImage(futures.get(i).get().fraction, i, futures.get(i).get().fraction.getHeight() * i, null);
+                g.drawImage(futures.get(i).get().fraction, 0, futures.get(i).get().fraction.getHeight() * i, null);
             }
         }  catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
