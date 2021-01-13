@@ -12,6 +12,18 @@ public class Julia extends Fractal
        super("Julia Set",imagePath);
     }
 
+    public Julia(Fractal fractal) {
+        super("Julia Set",imagePath);
+        setZoom(fractal.getZoom());
+        setPosX(fractal.getPosX());
+        setPosY(fractal.getPosY());
+        setHorizontalSide(fractal.getHorizontalSide());
+        setVerticalSide(fractal.getVerticalSide());
+        setBounds(0, 0, fractal.getHorizontalSide(), fractal.getVerticalSide());
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
     @Override
     void draw(int x, int y) {
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.

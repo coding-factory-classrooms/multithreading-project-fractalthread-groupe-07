@@ -15,13 +15,24 @@ public class Mandelbrot extends Fractal {
         setPosY(posY);
         setHorizontalSide(horizontalSide);
         setVerticalSide(verticalSide);
-        setBounds(0, 0, verticalSide, horizontalSide);
+        setBounds(0, 0, getHorizontalSide(), getVerticalSide());
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     public Mandelbrot() {
         super("Mandelbrot Set", IMAGE_MANDELBROT_PATH);
-        setBounds(0, 0, getVerticalSide(), getHorizontalSide());
+        setBounds(0, 0, getHorizontalSide(), getVerticalSide());
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    public Mandelbrot(Fractal fractal) {
+        super("Mandelbrot Set", IMAGE_MANDELBROT_PATH);
+        setZoom(fractal.getZoom());
+        setPosX(fractal.getPosX());
+        setPosY(fractal.getPosY());
+        setHorizontalSide(fractal.getHorizontalSide());
+        setVerticalSide(fractal.getVerticalSide());
+        setBounds(0, 0, fractal.getHorizontalSide(), fractal.getVerticalSide());
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }

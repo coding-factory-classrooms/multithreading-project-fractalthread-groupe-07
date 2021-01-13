@@ -32,7 +32,7 @@ private Fractal fractal;
     }
 
     public byte[] fractalRefresh(String direction, String type) throws IOException {
-        fractal = fractalFactory(type);
+        fractal = fractalFactory(type,fractal);
         switchDirection(direction, fractal);
         byte[] response = null;
         try {
@@ -50,14 +50,14 @@ private Fractal fractal;
         fractal.saveFileAsJpg(fractal.getImage());
     }
 
-    public Fractal fractalFactory(String name) {
+    public Fractal fractalFactory(String name, Fractal fractal) {
         switch (name) {
             case "mandel" :
-                return new Mandelbrot();
+                return new Mandelbrot(fractal);
             case "julia" :
                 System.out.println("Julia ! ");
-                return new Julia();
-            default: return new Mandelbrot();
+                return new Julia(fractal);
+            default: return new Mandelbrot(fractal);
         }
     }
 
