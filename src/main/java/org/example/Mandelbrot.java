@@ -40,8 +40,8 @@ public class Mandelbrot extends Fractal {
 
     public void draw(int x, int y, int fractionId, BufferedImage image) {
         zx = zy = 0;
-        cX = (x + getPosX()*fractionId) / getZoom();
-        cY = (y + getPosY()*fractionId) / getZoom();
+        cX = (x + getPosX()) / getZoom();
+        cY = (y*fractionId + getPosY()) / getZoom();
         int iter = MAX_ITER;
         while (zx * zx + zy * zy < 4 && iter > 0) {
             tmp = zx * zx - zy * zy + cX;

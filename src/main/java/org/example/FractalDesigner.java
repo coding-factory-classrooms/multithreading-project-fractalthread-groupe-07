@@ -17,26 +17,12 @@ public class FractalDesigner {
 
     public void designFractal () {
         if (fractal.getName().equals("mandel")) {
-
             int linesByChunk = 100;
-
-//            FractalTask.setFractal(fractal);
-//            FractalTask.setLinesByChunk(linesByChunk);
-
-            for (int i = 0; i < fractal.getVerticalSide()/linesByChunk; i++) {
-                futures.add(threadPool.submit(new ImageFractionTask(i, linesByChunk, fractal)));
-                /* try{
-                    Thread.sleep(20); // waiting 15ms to prevent having bugged stripes when proco is burning
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                FractalTask task = new FractalTask(i);
-                threadPool.execute(task);*/
-            }
-
+            createFractions(linesByChunk);
+            threadPool.shutdown();
             mergeFractions();
 
-//            threadPool.shutdown();
+
 //            try {
 //                threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
 //            } catch (InterruptedException e) {
@@ -46,6 +32,12 @@ public class FractalDesigner {
         else {
             System.out.println("draw julia");
             fractal.draw(0,0,0, fractal.getImage()); //make it work ok mais crado
+        }
+    }
+
+    private void createFractions(int linesByChunk) {
+        for (int i = 0; i < fractal.getVerticalSide()/linesByChunk; i++) {
+            futures.add(threadPool.submit(new ImageFractionTask(i, linesByChunk, fractal)));
         }
     }
 
