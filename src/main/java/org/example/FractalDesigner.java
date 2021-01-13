@@ -1,48 +1,57 @@
 package org.example;
 
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.concurrent.*;
 
 public class FractalDesigner {
+    private ArrayList<Future<ImageFraction>> futures;
     private Fractal fractal;
     private ExecutorService threadPool;
     public FractalDesigner(Fractal fractal, ExecutorService threadPool) {
         this.fractal = fractal;
         this.threadPool = threadPool;
+        this.futures = new ArrayList<Future<ImageFraction>>();
     }
 
     public void designFractal () {
         if (fractal.getName().equals("mandel")) {
-            int coreNumber = Runtime.getRuntime().availableProcessors();
-            ExecutorService threadPool = Executors.newFixedThreadPool(coreNumber);
-
-            int linesByChunk = 100;
-
-            FractalTask.setFractal(fractal);
-            FractalTask.setLinesByChunk(linesByChunk);
-
-            for (int i = 0; i < fractal.getVerticalSide()/linesByChunk; i++) {
-                try{
-                    Thread.sleep(20); // waiting 15ms to prevent having bugged stripes when proco is burning
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                FractalTask task = new FractalTask(i);
-                threadPool.execute(task);
-            }
-
+            int wantedChunks = 10;
+            int linesByChunk = fractal.getHorizontalSide()/wantedChunks;
+            createFractions(linesByChunk);
             threadPool.shutdown();
-            try {
-                threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            mergeFractions();
+
+
+//            try {
+//                threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
         else {
             System.out.println("draw julia");
-            fractal.draw(0,0); //make it work ok mais crado
+            fractal.draw(0,0,0, fractal.getImage()); //make it work ok mais crado
         }
+    }
+
+    private void createFractions(int linesByChunk) {
+        for (int i = 0; i < fractal.getVerticalSide()/linesByChunk; i++) {
+            futures.add(threadPool.submit(new ImageFractionTask(i, linesByChunk, fractal)));
+        }
+    }
+
+    private void mergeFractions() {
+        Graphics g = fractal.getImage().getGraphics();
+        try {
+            for (int i = 0; i < futures.size(); i++) {
+                g.drawImage(futures.get(i).get().fraction, i, futures.get(i).get().fraction.getHeight() * i, null);
+            }
+        }  catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        g.dispose();
+        fractal.saveFileAsJpg(fractal.getImage());
     }
 }
