@@ -27,7 +27,7 @@ public class FractalTask implements Runnable {
     public void run() {
         for (int y = 0; y < linesByChunk; y++) {
             for (int x = 0; x < fractal.getHorizontalSide(); x++) {
-                fractal.draw(x,y+chunkIteration*linesByChunk);
+                fractal.draw(x,y+chunkIteration*linesByChunk, fractal.getImage());
             }
         }
     }

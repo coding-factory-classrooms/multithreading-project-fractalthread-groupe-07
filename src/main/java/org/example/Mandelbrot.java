@@ -1,6 +1,7 @@
 package org.example;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Mandelbrot extends Fractal {
     private final int MAX_ITER = 5000;
@@ -29,12 +30,12 @@ public class Mandelbrot extends Fractal {
     public void generateImageWithoutThreading() {
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
-                draw(x,y);
+                draw(x,y,getImage());
             }
         }
     }
 
-    public void draw(int x, int y) {
+    public void draw(int x, int y, BufferedImage image) {
         zx = zy = 0;
         cX = (x + getPosX()) / getZoom();
         cY = (y + getPosY()) / getZoom();
@@ -45,7 +46,7 @@ public class Mandelbrot extends Fractal {
             zx = tmp;
             iter--;
         }
-        getImage().setRGB(x, y, iter*BEAUTIFUL_COLORS);
+        image.setRGB(x, y, iter*BEAUTIFUL_COLORS);
     }
 
     @Override
