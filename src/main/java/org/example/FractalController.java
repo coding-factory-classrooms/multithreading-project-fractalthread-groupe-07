@@ -2,12 +2,12 @@ package org.example;
 
 import org.example.core.Template;
 
+import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.Executors;
 
 public class FractalController {
@@ -21,6 +21,8 @@ public class FractalController {
     private int horizontalSide;
 */
 private Fractal fractal;
+
+    public static LRUCache<Integer, BufferedImage> cache = new LRUCache<>(20);
 
     public String fractalControllerInitialise() {
         try {
@@ -45,6 +47,11 @@ private Fractal fractal;
     }
 
     private static void RenderImage(Fractal fractal) throws IOException {
+        /*BufferedImage bfImage;
+        if (cache.containValue(fractal.getImage())) {
+            bfImage = fractal.getImage();
+
+        }*/
         fractal.makeImage();
         int coreNumber = Runtime.getRuntime().availableProcessors();
         new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
@@ -117,22 +124,7 @@ private Fractal fractal;
     }
 
     public static void main(String[] args) {
-//        try {
-//            int horizontalSide = 1000;
-//            int verticalSide = 1000;
-//            FractalController controller = new FractalController();
-//            int runs = 10;
-//
-//            System.out.println("_with threading_");
-//            controller.writeStats(true,runs,horizontalSide,verticalSide,200, -400, -400);
-//
-//            System.out.println("_without threading_");
-//            controller.writeStats(false,runs, horizontalSide,verticalSide,200, -400, -400);
-//
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
         FractalController controller = new FractalController();
         int runs = 10;
 

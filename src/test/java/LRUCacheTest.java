@@ -1,50 +1,40 @@
-import java.util.ArrayList;
-
 import org.example.LRUCache;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-public class LRUCacheTest {
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-    private LRUCache c;
+class TestLruCache {
 
-    public LRUCacheTest() {
-        this.c = new LRUCache(2);
+    static class MyHardDrive {
+        Map<String, Object> resources = new HashMap<>();
+
+        MyHardDrive(){
+            for(char i = 'A'; i<='Z'; i++){
+                resources.put(Character.toString(i), new Object());
+            }
+        }
+
+        Object loadResource(String name){
+            return resources.get(name);
+        }
     }
 
     @Test
-    public void testCacheStartsEmpty() {
-        assertEquals(c.get(1), -1);
-    }
+    public static void main(String[] args) {
+        MyHardDrive hd = new MyHardDrive();
+        LRUCache<String,Object> cache = new LRUCache<>(4);
 
-    @Test
-    public void testSetBelowCapacity() {
-        c.set(1, 1);
-        assertEquals(c.get(1), 1);
-        assertEquals(c.get(2), -1);
-        c.set(2, 4);
-        assertEquals(c.get(1), 1);
-        assertEquals(c.get(2), 4);
-    }
-
-    @Test
-    public void testCapacityReachedOldestRemoved() {
-        c.set(1, 1);
-        c.set(2, 4);
-        c.set(3, 9);
-        assertEquals(c.get(1), -1);
-        assertEquals(c.get(2), 4);
-        assertEquals(c.get(3), 9);
-    }
-
-    @Test
-    public void testGetRenewsEntry() {
-        c.set(1, 1);
-        c.set(2, 4);
-        assertEquals(c.get(1), 1);
-        c.set(3, 9);
-        assertEquals(c.get(1), 1);
-        assertEquals(c.get(2), -1);
-        assertEquals(c.get(3), 9);
+        for(String key: Arrays.asList("A","B","C","A","D","E","F","E","F","G","A")){
+            Object object = cache.get(key);
+            if(object==null){
+                object = hd.loadResource(key);
+                cache.put(key, object);
+                System.out.println("key :" + key);
+                System.out.println("object :" + hd.loadResource(key).toString());
+            }
+            cache.printSequence();
+        }
     }
 }
