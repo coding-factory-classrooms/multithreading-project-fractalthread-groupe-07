@@ -23,3 +23,9 @@ bounaixvincent - 11 Jan 2021, 15:15 - 1955 average ms
 Génération du fractal de 1000 pixels de côté sur 1 runs avec multi-threads=true par membre d'équipe:
 Arnaud - 11 Jan 2021, 15:15 - 1835 average ms
 -------------------------------------------------------------------------
+Génération du fractal  de 1000X1000 pixels de côté sur 10 runs *avec multi-threads=true* par membre d'équipe: 
+Axel - 13 janv. 2021 17:00 - 1905 average ms
+-------------------------------------------------------------------------
+Génération du fractal  de 1000X1000 pixels de côté sur 10 runs *avec multi-threads=false* par membre d'équipe: 
+Axel - 13 janv. 2021 17:00 - 157 average ms
+-------------------------------------------------------------------------

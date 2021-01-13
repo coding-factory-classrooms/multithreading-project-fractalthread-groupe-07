@@ -14,6 +14,7 @@ public class FractalDesigner {
     private Fractal fractal;
     private ExecutorService threadPool;
     private static final String EASTER_EGG_PATH = "src/main/resources/static/img/easter_egg_equipe.png";
+
     public FractalDesigner(Fractal fractal, ExecutorService threadPool) {
         this.fractal = fractal;
         this.threadPool = threadPool;
@@ -22,7 +23,7 @@ public class FractalDesigner {
 
     public void designFractal () {
         if (fractal.getName().equals("mandel")) {
-            int wantedChunks = 100;
+            int wantedChunks = 10;
             int linesByChunk = fractal.getHorizontalSide()/wantedChunks;
             createFractions(linesByChunk);
             threadPool.shutdown();
@@ -30,7 +31,6 @@ public class FractalDesigner {
             addEasterEggOrNot();
         }
         else {
-            System.out.println("draw julia");
             fractal.draw(0,0,0, fractal.getImage()); //make it work ok mais crado
         }
     }
