@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
 
 public class FractalController {
     final int pas = 100;
+    final float pasZoomJulia = 0.5F;
 /*
     double zoom = 5800; //200
     int posX = 2000; //400
@@ -56,8 +57,7 @@ private Fractal fractal;
                 return new Mandelbrot(fractal);
             case "julia" :
                 System.out.println("Julia ! ");
-                float zoom = 2;
-                return new Julia(fractal,zoom);
+                return new Julia(fractal);
             default: return new Mandelbrot(fractal);
         }
     }
@@ -95,12 +95,20 @@ private Fractal fractal;
                 this.fractal.setPosX(this.fractal.getPosX()+pas);
                 break;
             case "zoom" :
+                if (this.fractal.getName().equals("julia")) {
+                    this.fractal.setZoom(this.fractal.getZoom()*pasZoomJulia);
+                    break;
+                }
                 this.fractal.setZoom(this.fractal.getZoom()+pas);
                 break;
             case "unzoom" :
                 if (this.fractal.getZoom()-pas < 0) {
                     break;
                 } else {
+                    if (this.fractal.getName().equals("julia")) {
+                        this.fractal.setZoom(this.fractal.getZoom()/pasZoomJulia);
+                        break;
+                    }
                     this.fractal.setZoom(this.fractal.getZoom()-pas);
                 }
                 break;

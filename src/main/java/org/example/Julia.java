@@ -12,9 +12,9 @@ public class Julia extends Fractal
        super("Julia Set",imagePath);
     }
 
-    public Julia(Fractal fractal, float zoom) {
+    public Julia(Fractal fractal) {
         super("Julia Set",imagePath);
-        setZoom(zoom);
+        setZoom(fractal.getZoom());
         setPosX(fractal.getPosX());
         setPosY(fractal.getPosY());
         setHorizontalSide(fractal.getHorizontalSide());
