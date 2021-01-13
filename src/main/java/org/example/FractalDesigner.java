@@ -20,8 +20,8 @@ public class FractalDesigner {
 
             int linesByChunk = 100;
 
-            FractalTask.setFractal(fractal);
-            FractalTask.setLinesByChunk(linesByChunk);
+//            FractalTask.setFractal(fractal);
+//            FractalTask.setLinesByChunk(linesByChunk);
 
             for (int i = 0; i < fractal.getVerticalSide()/linesByChunk; i++) {
                 futures.add(threadPool.submit(new ImageFractionTask(i, linesByChunk, fractal)));
@@ -36,12 +36,12 @@ public class FractalDesigner {
 
             mergeFractions();
 
-            threadPool.shutdown();
-            try {
-                threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            threadPool.shutdown();
+//            try {
+//                threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
         else {
             System.out.println("draw julia");
@@ -53,6 +53,7 @@ public class FractalDesigner {
         Graphics g = fractal.getImage().getGraphics();
         try {
             for(Future<ImageFraction> f : futures) {
+                System.out.println(f.get().fraction.getHeight() * f.get().id);
                 g.drawImage(f.get().fraction, f.get().fraction.getWidth(), f.get().fraction.getHeight() * f.get().id, null);
             }
         } catch (InterruptedException e) {

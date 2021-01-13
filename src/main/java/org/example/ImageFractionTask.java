@@ -12,7 +12,7 @@ public class ImageFractionTask implements Callable<ImageFraction> {
     public ImageFractionTask(int id, int linesByChunk, Fractal fractal) {
         this.id = id;
         this.linesByChunk = linesByChunk;
-        fraction = new BufferedImage(linesByChunk, fractal.getHorizontalSide(), BufferedImage.TYPE_INT_RGB);
+        fraction = new BufferedImage(fractal.getHorizontalSide(),linesByChunk, BufferedImage.TYPE_INT_RGB);
         this.fractal = fractal;
     }
 
@@ -20,7 +20,7 @@ public class ImageFractionTask implements Callable<ImageFraction> {
     public ImageFraction call() throws Exception {
         for (int y = 0; y < linesByChunk; y++) {
             for (int x = 0; x < fractal.getHorizontalSide(); x++) {
-                fractal.draw(x, y+id*linesByChunk, fraction);
+                fractal.draw(x, y, fraction);
             }
         }
         return new ImageFraction(id, fraction);
