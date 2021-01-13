@@ -1,12 +1,22 @@
+var isJulia = false;
 function getJulia() {
+    isJulia = true;
     return fetch("/getImage?direction=none&type=julia")
     .then(response => response.blob())
     .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
 }
 function getImage(direction) {
-    return fetch('/getImage'+'?direction='+direction+"&type=mandel")
-    .then(response => response.blob())
-    .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+    if(isJulia) {
+        return fetch('/getImage'+'?direction='+direction+"&type=julia")
+        .then(response => response.blob())
+            .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+    }
+    else {
+        return fetch('/getImage'+'?direction='+direction+"&type=mandel")
+        .then(response => response.blob())
+            .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+    }
+
 }
 
 function setSides() {
