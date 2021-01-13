@@ -1,11 +1,5 @@
 package org.example;
 
-import org.example.ComplexNumber;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import static java.lang.System.out;
