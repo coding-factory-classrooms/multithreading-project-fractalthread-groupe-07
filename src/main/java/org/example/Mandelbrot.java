@@ -39,7 +39,8 @@ public class Mandelbrot extends Fractal {
     }
 
     public void generateImageWithoutThreading() {
-        int linesByChunk = 100;
+        int linesByChunk = 1000;
+        System.out.println(getHeight() + " et lbc "+linesByChunk);
         for (int i = 0; i < getHeight()/linesByChunk; ++i) {
             for (int y = 0; y < getHeight(); y++) {
                 for (int x = 0; x < getWidth(); x++) {
@@ -52,7 +53,7 @@ public class Mandelbrot extends Fractal {
     public void draw(int x, int y, int fractionId, BufferedImage image) {
         zx = zy = 0;
         cX = (x + getPosX()) / getZoom();
-        cY = (y*fractionId + getPosY()) / getZoom();
+        cY = (y + getPosY()) / getZoom();
         int iter = MAX_ITER;
         while (zx * zx + zy * zy < 4 && iter > 0) {
             tmp = zx * zx - zy * zy + cX;

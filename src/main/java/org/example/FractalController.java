@@ -112,12 +112,12 @@ private Fractal fractal;
             int horizontalSide = 1000;
             int verticalSide = 1000;
             FractalController controller = new FractalController();
-            int runs = 10;
+            int runs = 1;
 
             System.out.println("_without threading_");
-            controller.writeStats(false,runs, horizontalSide,verticalSide,200, -400, -400);
-            System.out.println("_with threading_");
-            controller.writeStats(true,runs,horizontalSide,verticalSide,200, -400, -400);
+            controller.writeStats(false,runs, horizontalSide,verticalSide,100, -400, -400);
+//            System.out.println("_with threading_");
+//            controller.writeStats(true,runs,horizontalSide,verticalSide,200, -400, -400);
             System.out.println("Stats OK");
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,9 +144,9 @@ private Fractal fractal;
             long elapsed = System.currentTimeMillis() - start;
             stepMS = stepMS + elapsed;
 
-            FileWriter writer = new FileWriter("stats.md", true);
-            writer.write("multithread: " + String.valueOf(withThreading).toUpperCase(Locale.ROOT) + " Run " + i + " sur " + runs +" avec un fractal de "+verticalSide+"X"+horizontalSide+ "px sur " +  "TPS " + elapsed + "MS"+ "\r\n");
-            writer.close();
+//            FileWriter writer = new FileWriter("stats.md", true);
+//            writer.write("multithread: " + String.valueOf(withThreading).toUpperCase(Locale.ROOT) + " Run " + i + " sur " + runs +" avec un fractal de "+verticalSide+"X"+horizontalSide+ "px sur " +  "TPS " + elapsed + "MS"+ "\r\n");
+//            writer.close();
         }
         long elapsedTotal = System.currentTimeMillis() - startTotal;
 
@@ -154,18 +154,18 @@ private Fractal fractal;
         DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
                 DateFormat.MEDIUM,
                 DateFormat.SHORT);
-        try {
-            FileWriter writer = new FileWriter("stats.md", true);
-            writer.write("Total ELapsed Time:  " + elapsedTotal + " MS" + "\r\n");
-            writer.write("Génération du fractal  de "+verticalSide+"X"+horizontalSide+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
-            writer.close();
-
-            String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
-
-            saveTimeInFile(dateAndTimeToSave);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FileWriter writer = new FileWriter("stats.md", true);
+//            writer.write("Total ELapsed Time:  " + elapsedTotal + " MS" + "\r\n");
+//            writer.write("Génération du fractal  de "+verticalSide+"X"+horizontalSide+" pixels de côté sur "+runs+" runs *avec multi-threads="+withThreading+"* par membre d'équipe: " + "\r\n");
+//            writer.close();
+//
+//            String dateAndTimeToSave = shortDateFormat.format(dateNow) + " - " + stepMS / runs;
+//
+//            saveTimeInFile(dateAndTimeToSave);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void saveTimeInFile(String timeToWrite) {
