@@ -17,7 +17,8 @@ public class FractalDesigner {
 
     public void designFractal () {
         if (fractal.getName().equals("mandel")) {
-            int linesByChunk = 100;
+            int wantedChunks = 10;
+            int linesByChunk = fractal.getHorizontalSide()/wantedChunks;
             createFractions(linesByChunk);
             threadPool.shutdown();
             mergeFractions();
@@ -45,7 +46,7 @@ public class FractalDesigner {
         Graphics g = fractal.getImage().getGraphics();
         try {
             for (int i = 0; i < futures.size(); i++) {
-                g.drawImage(futures.get(i).get().fraction, i, futures.get(i).get().fraction.getHeight() * futures.get(i).get().id, null);
+                g.drawImage(futures.get(i).get().fraction, i, futures.get(i).get().fraction.getHeight() * i, null);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
