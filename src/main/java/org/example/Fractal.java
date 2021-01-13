@@ -35,7 +35,7 @@ public abstract class Fractal extends JFrame {
     }
 
     public void makeImage() {
-        this.image = new BufferedImage(verticalSide, horizontalSide, BufferedImage.TYPE_INT_RGB);
+        this.image = new BufferedImage(horizontalSide, verticalSide, BufferedImage.TYPE_INT_RGB);
     }
 
     public void saveFileAsJpg(BufferedImage bufferedImage) {
