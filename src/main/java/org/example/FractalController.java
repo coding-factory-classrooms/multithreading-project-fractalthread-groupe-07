@@ -101,22 +101,51 @@ public class FractalController {
     }
 
     public static void main(String[] args) {
-        try {
-            int horizontalSide = 1000;
-            int verticalSide = 1000;
-            FractalController controller = new FractalController();
-            int runs = 10;
+//        try {
+//            int horizontalSide = 1000;
+//            int verticalSide = 1000;
+//            FractalController controller = new FractalController();
+//            int runs = 10;
+//
+//            System.out.println("_with threading_");
+//            controller.writeStats(true,runs,horizontalSide,verticalSide,200, -400, -400);
+//
+//            System.out.println("_without threading_");
+//            controller.writeStats(false,runs, horizontalSide,verticalSide,200, -400, -400);
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        FractalController controller = new FractalController();
+        int runs = 10;
 
-            System.out.println("_with threading_");
-            controller.writeStats(true,runs,horizontalSide,verticalSide,200, -400, -400);
-
-            System.out.println("_without threading_");
-            controller.writeStats(false,runs, horizontalSide,verticalSide,200, -400, -400);
-
-            System.out.println("Stats OK");
-        } catch (IOException e) {
-            e.printStackTrace();
+        long elapsed = 0;
+        System.out.println("with threading");
+        Mandelbrot fractal = new Mandelbrot();
+        fractal.makeImage();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < runs; i++) {
+            new FractalDesigner(fractal, Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())).designFractal();
+            elapsed +=  System.currentTimeMillis() - start;
+            System.out.println(System.currentTimeMillis() - start);
         }
+
+        System.out.println("average with threading "+(elapsed/runs));
+
+//        System.out.println("without threading");
+//        start = System.currentTimeMillis();
+//        elapsed = 0;
+//        for (int i = 0; i < runs; i++) {
+//            fractal.generateImageWithoutThreading();
+//            elapsed +=  System.currentTimeMillis() - start;
+//            System.out.println(System.currentTimeMillis() - start);
+//        }
+//
+//        System.out.println("average without threading "+(elapsed/runs));
+
+
+        System.out.println("Stats OK");
     }
 
     /**
