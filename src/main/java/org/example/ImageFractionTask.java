@@ -20,7 +20,7 @@ public class ImageFractionTask implements Callable<ImageFraction> {
     public ImageFraction call() throws Exception {
         for (int y = 0; y < linesByChunk; y++) {
             for (int x = 0; x < fractal.getHorizontalSide(); x++) {
-                fractal.draw(x, y, fraction);
+                fractal.draw(x, y, 1, fraction);
             }
         }
         return new ImageFraction(id, fraction);

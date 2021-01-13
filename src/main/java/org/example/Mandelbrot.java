@@ -28,17 +28,20 @@ public class Mandelbrot extends Fractal {
     }
 
     public void generateImageWithoutThreading() {
-        for (int y = 0; y < getHeight(); y++) {
-            for (int x = 0; x < getWidth(); x++) {
-                draw(x,y,getImage());
+        int linesByChunk = 100;
+        for (int i = 0; i < getHeight()/linesByChunk; ++i) {
+            for (int y = 0; y < getHeight(); y++) {
+                for (int x = 0; x < getWidth(); x++) {
+                    draw(x,y,i,getImage());
+                }
             }
         }
     }
 
-    public void draw(int x, int y, BufferedImage image) {
+    public void draw(int x, int y, int fractionId, BufferedImage image) {
         zx = zy = 0;
-        cX = (x + getPosX()) / getZoom();
-        cY = (y + getPosY()) / getZoom();
+        cX = (x + getPosX()*fractionId) / getZoom();
+        cY = (y + getPosY()*fractionId) / getZoom();
         int iter = MAX_ITER;
         while (zx * zx + zy * zy < 4 && iter > 0) {
             tmp = zx * zx - zy * zy + cX;

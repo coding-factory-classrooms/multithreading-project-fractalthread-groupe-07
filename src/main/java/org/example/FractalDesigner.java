@@ -45,16 +45,15 @@ public class FractalDesigner {
         }
         else {
             System.out.println("draw julia");
-            fractal.draw(0,0, fractal.getImage()); //make it work ok mais crado
+            fractal.draw(0,0,0, fractal.getImage()); //make it work ok mais crado
         }
     }
 
     private void mergeFractions() {
         Graphics g = fractal.getImage().getGraphics();
         try {
-            for(Future<ImageFraction> f : futures) {
-                System.out.println(f.get().fraction.getHeight() * f.get().id);
-                g.drawImage(f.get().fraction, f.get().fraction.getWidth(), f.get().fraction.getHeight() * f.get().id, null);
+            for (int i = 0; i < futures.size(); i++) {
+                g.drawImage(futures.get(i).get().fraction, i, futures.get(i).get().fraction.getHeight() * futures.get(i).get().id, null);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

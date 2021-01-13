@@ -16,7 +16,7 @@ public abstract class Fractal extends JFrame {
     private int posX = 2000;
     private int posY = -2600;
 
-    abstract void draw(int x, int y, BufferedImage image);
+    abstract void draw(int x, int y, int fractionId, BufferedImage image);
 
     public Fractal(String title, String imagePath) {
         super(title);
