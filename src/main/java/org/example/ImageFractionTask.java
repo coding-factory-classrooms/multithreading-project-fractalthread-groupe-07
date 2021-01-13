@@ -12,7 +12,6 @@ public class ImageFractionTask implements Callable<ImageFraction> {
     public ImageFractionTask(int id, int linesByChunk, Fractal fractal) {
         this.id = id;
         this.linesByChunk = linesByChunk;
-        fraction = new BufferedImage(fractal.getHorizontalSide(), linesByChunk, BufferedImage.TYPE_INT_RGB);
         fraction = new BufferedImage(fractal.getHorizontalSide(),linesByChunk, BufferedImage.TYPE_INT_RGB);
         this.fractal = fractal;
     }
