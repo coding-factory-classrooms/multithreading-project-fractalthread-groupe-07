@@ -12,7 +12,15 @@ import java.util.concurrent.Executors;
 
 public class FractalController {
     final int pas = 100;
-    private Fractal fractal;
+    final float pasZoomJulia = 2F;
+/*
+    double zoom = 5800; //200
+    int posX = 2000; //400
+    int posY = -2600; //-400
+    private int verticalSide;
+    private int horizontalSide;
+*/
+private Fractal fractal;
 
     public String fractalControllerInitialise() {
         try {
@@ -87,12 +95,20 @@ public class FractalController {
                 this.fractal.setPosX(this.fractal.getPosX()+pas);
                 break;
             case "zoom" :
+                if (this.fractal.getName().equals("julia")) {
+                    this.fractal.setZoom(this.fractal.getZoom()/pasZoomJulia);
+                    break;
+                }
                 this.fractal.setZoom(this.fractal.getZoom()+pas);
                 break;
             case "unzoom" :
                 if (this.fractal.getZoom()-pas < 0) {
                     break;
                 } else {
+                    if (this.fractal.getName().equals("julia")) {
+                        this.fractal.setZoom(this.fractal.getZoom()*pasZoomJulia);
+                        break;
+                    }
                     this.fractal.setZoom(this.fractal.getZoom()-pas);
                 }
                 break;
