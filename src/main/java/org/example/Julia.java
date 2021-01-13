@@ -12,9 +12,9 @@ public class Julia extends Fractal
        super("Julia Set",imagePath);
     }
 
-    public Julia(Fractal fractal) {
+    public Julia(Fractal fractal, float zoom) {
         super("Julia Set",imagePath);
-        setZoom(fractal.getZoom());
+        setZoom(zoom);
         setPosX(fractal.getPosX());
         setPosY(fractal.getPosY());
         setHorizontalSide(fractal.getHorizontalSide());
@@ -70,9 +70,8 @@ public class Julia extends Fractal
                 // I use the function,
                 // Re(z) = 2*(X-WIDTH/2)/(WIDTH/2)
                 // Im(z) = 1.33*(Y-HEIGHT/2)/(HEIGHT/2)
-                // This gives a good centered fractal.You can play around with the function to get better results.
-
-                ComplexNumber newz = new ComplexNumber(2.0*(X-WIDTH/2)/(WIDTH/2), 1.33*(Y-HEIGHT/2)/(HEIGHT/2) );
+                // This gives a good centered fractal.You can play around with the function to get better results.// zoom sera une valeure multiplicative donc exemple, si zoom 2, si pas zoom 0.5
+                ComplexNumber newz = new ComplexNumber((1.0*getZoom())*(X-WIDTH/2)/(WIDTH/2), (0.33*getZoom())*(Y-HEIGHT/2)/(HEIGHT/2) );
 
                 // Iterating till the orbit of z0 escapes the radius 2 or till maximum iterations are completed
                 int i;

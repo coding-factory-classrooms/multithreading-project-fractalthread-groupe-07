@@ -56,7 +56,8 @@ private Fractal fractal;
                 return new Mandelbrot(fractal);
             case "julia" :
                 System.out.println("Julia ! ");
-                return new Julia(fractal);
+                float zoom = 2;
+                return new Julia(fractal,zoom);
             default: return new Mandelbrot(fractal);
         }
     }
