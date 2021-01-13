@@ -2,7 +2,7 @@ Génération du fractal sur 10 runs *sans threads* par membre d'équipe:
 custodioanthony - 8 janv. 2021 15:27 - 1151 average ms
 -------------------------------------------------------------------------
 Génération du fractal sur 10 runs *sans threads* par membre d'équipe: 
-bounaixvincent - 8 Jan 2021, 15:36 - 1512 average ms
+bounaixvincent - 8 Jan 2021, 15:36 - 651 average ms
 -------------------------------------------------------------------------
 Génération du fractal sur 10 runs *sans threads* par membre d'équipe: 
 Axel - 13 janv. 2021 17:49 - 730 average ms
@@ -21,7 +21,7 @@ Génération du fractal de 1000 pixels de côté sur 1 runs avec multi-threads=t
 custodioanthony - 11 janv. 2021 14:58 - 3284 average ms
 -------------------------------------------------------------------------
 Génération du fractal de 1000 pixels de côté sur 1 runs avec multi-threads=true par membre d'équipe:
-bounaixvincent - 11 Jan 2021, 15:15 - 1955 average ms
+bounaixvincent - 11 Jan 2021, 15:15 - 837 average ms
 -------------------------------------------------------------------------
 Génération du fractal de 1000 pixels de côté sur 1 runs avec multi-threads=true par membre d'équipe:
 Arnaud - 11 Jan 2021, 15:15 - 1835 average ms
