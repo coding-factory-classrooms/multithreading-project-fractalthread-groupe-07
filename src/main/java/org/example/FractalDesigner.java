@@ -48,9 +48,7 @@ public class FractalDesigner {
             for (int i = 0; i < futures.size(); i++) {
                 g.drawImage(futures.get(i).get().fraction, i, futures.get(i).get().fraction.getHeight() * i, null);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        }  catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         g.dispose();
