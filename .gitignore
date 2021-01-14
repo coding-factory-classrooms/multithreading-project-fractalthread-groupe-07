@@ -78,3 +78,7 @@ src/main/resources/static/img/mandelbrot.jpg
 build.gradle
 
 .idea/misc.xml
+
+src/main/resources/static/img/julia.jpg
+
+.idea/jsLibraryMappings.xml

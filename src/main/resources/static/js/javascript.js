@@ -18,12 +18,12 @@ function getFractal() {
 }
 function getImage(direction) {
     if(isJulia) {
-        return fetch('/getImage'+'?direction='+direction+"&type=julia")
+        return fetch('/getImage?direction='+direction+"&type=julia")
         .then(response => response.blob())
             .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
     }
     else {
-        return fetch('/getImage'+'?direction='+direction+"&type=mandel")
+        return fetch('/getImage?direction='+direction+"&type=mandel")
         .then(response => response.blob())
             .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
     }
