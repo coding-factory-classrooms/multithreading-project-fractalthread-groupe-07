@@ -1,21 +1,25 @@
 #parse("base.html")
 #@mainLayout()
-<h1>Mendeleiev.bat</h1>
-<div>
-    <div class="row">
-        <img id="FractalImage" src="img/mandelbrot.jpg" />
+<div id="mainBody">
+    <div>
+        <div class="col-12" style="text-align: center;">
+            <h4 style="font-weight:bolder;">
+                To see the easterEgg, just go down one time ! (posX = 2000; posY = -2600)
+            </h4>
+        </div>
+        <div class="row">
+            <img id="FractalImage" src="img/mandelbrot.jpg" />
+        </div>
     </div>
+
     <div class="block">
+
         <div class=row>
             <button id="top" value="up" onclick="getImage(this.value)" class="btn btn-primary solo">Haut</button>
         </div>
 
         <div class="row">
-            <div class="col-4">
-                <p style="font-weight:990">
-                    To see the easterEgg, just go down one time ! (posX = 2000; posY = -2600)
-                </p>
-            </div>
+
             <button id="left " value="left" onclick="getImage(this.value)" class="btn btn-primary gauche">Gauche</button>
             <button id="unzoom" value="unzoom" onclick="getImage(this.value)" class="btn btn-primary">Unzoom</button>
             <button id="zoom" value="zoom" onclick="getImage(this.value)" class="btn btn-primary">Zoom</button>
@@ -25,23 +29,44 @@
         <div class="row">
             <button id="down" value="down" onclick="getImage(this.value)" class="btn btn-primary solo">Bas</button>
         </div>
-        <div class="row">
-            <button id="juliaBtn" onclick="getJulia()" class="btn btn-primary solo">Julia !</button>
-        </div>
-        <div>
 
-            <form style="text-align: center" method="GET" action="javascript:setSides()">
-                <label for="vertical">Vertical:</label>
-                <input type="text" id="vertical" name="verticalSide" required
-                       minlength="0" maxlength="8" size="10">
-                <label for="vertical">Horizontal:</label>
-                <input type="text" id="horizontal" name=horizontalSide" required
-                       minlength="0" maxlength="8" size="10">
-                <br/>
-                <button type="submit" class="btn btn-primary">Redimensionner</button>
-            </form>
+        <div id="menuToggle" class="row">
+
+            <div id="menu" class="row">
+                <div id="blockSwitch" class="col-5">
+                    <div id="rowSwitch">
+                        <label class="switch">
+                            <input id="chkSwitch" type="checkbox" onclick="getFractal()" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <h5 id="nameFractalTxt">Mandelbrot</h5>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+                <div id="blockSize" class="col-5">
+
+                    <form style="text-align: center" method="GET" action="javascript:setSides()">
+                        <label for="vertical">Vertical:</label>
+                        <input type="text" id="vertical" name="verticalSide" required
+                               minlength="0" maxlength="8" size="10">
+                        <label for="vertical">Horizontal:</label>
+                        <input type="text" id="horizontal" name=horizontalSide" required
+                               minlength="0" maxlength="8" size="10">
+                        <br/>
+                        <button type="submit" class="btn btn-primary">REDIMENSIONNER !</button>
+                    </form>
+                </div>
+            </div>
+
+            <!--
+            Too bad the menu has to be inside of the button
+            but hey, it's pure CSS magic.
+            -->
+
         </div>
+
     </div>
+
     <script src="/js/javascript.js"></script>
 </div>
 #end
