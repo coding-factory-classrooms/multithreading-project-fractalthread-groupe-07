@@ -62,11 +62,6 @@ public class LRUCache<K, V> {
         lruCacheMap.put(k, v);
     }
 
-    public void printSequence() {
-        System.out.println(lruCacheMap.keySet());
-        System.out.println(lruCacheMap.values());
-    }
-
     public Integer keyEntriesInit() {
         int count = 0;
         if (lruCacheMap != null) {

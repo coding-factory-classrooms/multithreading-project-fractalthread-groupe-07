@@ -2,11 +2,12 @@ package org.example;
 
 import org.example.core.Template;
 
-import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 public class FractalController {
@@ -21,7 +22,7 @@ public class FractalController {
 */
 private Fractal fractal;
 
-    public static LRUCache<Integer, BufferedImage> cache = new LRUCache<>(50);
+    public static LRUCache<Integer, Fractal> cache = new LRUCache<>(50);
 
     public String fractalControllerInitialise() {
         try {
@@ -46,16 +47,17 @@ private Fractal fractal;
     }
 
     private static void RenderImage(Fractal fractal) throws IOException {
-        if (cache.containValue(fractal.getImage())) {
-            fractal.saveFileAsJpg(fractal.getImage());
+        if (cache.containValue(fractal)) {
+            Integer fractalKey = cache.getKeyByValue(fractal);
+            Fractal fractalCache = cache.getValue(fractalKey);
+            fractal.saveFileAsJpg(fractalCache.getImage());
         } else {
             fractal.makeImage();
             int coreNumber = Runtime.getRuntime().availableProcessors();
             new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
-            cache.put(cache.keyEntriesInit() + 1, fractal.getImage());
-            cache.printSequence();
+            cache.put(cache.keyEntriesInit() + 1, fractal);
+            fractal.saveFileAsJpg(fractal.getImage());
         }
-        fractal.saveFileAsJpg(fractal.getImage());
     }
 
     public Fractal fractalFactory(String name, Fractal fractal) {
