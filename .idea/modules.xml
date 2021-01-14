@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-template-spark.iml" filepath="$PROJECT_DIR$/.idea/modules/project-template-spark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-template-spark.main.iml" filepath="$PROJECT_DIR$/.idea/modules/project-template-spark.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-template-spark.test.iml" filepath="$PROJECT_DIR$/.idea/modules/project-template-spark.test.iml" />
     </modules>
   </component>
 </project>

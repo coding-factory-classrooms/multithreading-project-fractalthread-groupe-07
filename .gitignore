@@ -75,7 +75,5 @@ fabric.properties
 
 src/main/resources/static/img/mandelbrot.jpg
 
-build.gradle
-
 src/main/resources/static/img/julia.jpg
 
