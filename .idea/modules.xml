@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< Updated upstream
+      <module fileurl="file://$PROJECT_DIR$/.idea/Projet MultiThreading.iml" filepath="$PROJECT_DIR$/.idea/Projet MultiThreading.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-template-spark.iml" filepath="$PROJECT_DIR$/.idea/modules/project-template-spark.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-template-spark.main.iml" filepath="$PROJECT_DIR$/.idea/modules/project-template-spark.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-template-spark.test.iml" filepath="$PROJECT_DIR$/.idea/modules/project-template-spark.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/test/test.iml" filepath="$PROJECT_DIR$/src/test/test.iml" />
->>>>>>> Stashed changes
     </modules>
   </component>
 </project>
