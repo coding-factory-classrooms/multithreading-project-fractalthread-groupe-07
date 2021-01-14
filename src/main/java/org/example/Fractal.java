@@ -21,6 +21,7 @@ public abstract class Fractal extends JFrame {
     public Fractal(String title, String imagePath) {
         super(title);
         this.imagePath = imagePath;
+        this.image = new BufferedImage(horizontalSide, verticalSide, BufferedImage.TYPE_INT_RGB);
     }
 
     public byte[] getFractalFromBuffer() throws IOException {
@@ -32,10 +33,6 @@ public abstract class Fractal extends JFrame {
         baos.close();
 
         return imageInByte;
-    }
-
-    public void makeImage() {
-        this.image = new BufferedImage(horizontalSide, verticalSide, BufferedImage.TYPE_INT_RGB);
     }
 
     public void saveFileAsJpg(BufferedImage bufferedImage) {

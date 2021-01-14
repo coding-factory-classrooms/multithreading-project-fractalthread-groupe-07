@@ -15,9 +15,10 @@ public class Julia extends Fractal
 
     public Julia(Fractal fractal) {
         super("Julia Set",imagePath);
-        setZoom(1);
+        setZoom(fractal.getZoom());
         setPosX(fractal.getPosX());
         setPosY(fractal.getPosY());
+        setZoom(getZoom());
         setHorizontalSide(fractal.getHorizontalSide());
         setVerticalSide(fractal.getVerticalSide());
         setBounds(0, 0, fractal.getHorizontalSide(), fractal.getVerticalSide());
@@ -30,7 +31,7 @@ public class Julia extends Fractal
         // Taking the Image WIDTH and HEIGHT variables. Increasing or decreasing the value will affect computation time.
         double WIDTH = getHorizontalSide();
         double HEIGHT = getVerticalSide();
-        System.out.println("it is ");
+        System.out.println("zoom "+getZoom());
 
         // Setting the Saturation of every pixel to maximum
         // This can be played with to get different results
@@ -72,7 +73,7 @@ public class Julia extends Fractal
                 // Re(z) = 2*(X-WIDTH/2)/(WIDTH/2)
                 // Im(z) = 1.33*(Y-HEIGHT/2)/(HEIGHT/2)
                 // This gives a good centered fractal.You can play around with the function to get better results.// zoom sera une valeure multiplicative donc exemple, si zoom 2, si pas zoom 0.5
-                ComplexNumber newz = new ComplexNumber((getZoom())*(X-WIDTH/2)/(WIDTH/2), (zoomWidth)*(Y-HEIGHT/2)/(HEIGHT/2) );
+                ComplexNumber newz = new ComplexNumber((getZoom())*(X-WIDTH/2)/(WIDTH/2), getZoom()*(zoomWidth)*(Y-HEIGHT/2)/(HEIGHT/2) );
 
                 // Iterating till the orbit of z0 escapes the radius 2 or till maximum iterations are completed
                 int i;

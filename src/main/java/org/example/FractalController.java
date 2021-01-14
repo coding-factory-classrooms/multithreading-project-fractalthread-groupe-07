@@ -13,14 +13,7 @@ import java.util.concurrent.Executors;
 public class FractalController {
     final int pas = 100;
     final float pasZoomJulia = 2F;
-/*
-    double zoom = 5800; //200
-    int posX = 2000; //400
-    int posY = -2600; //-400
-    private int verticalSide;
-    private int horizontalSide;
-*/
-private Fractal fractal;
+    private Fractal fractal;
 
     public String fractalControllerInitialise() {
         try {
@@ -45,7 +38,6 @@ private Fractal fractal;
     }
 
     private static void RenderImage(Fractal fractal) throws IOException {
-        fractal.makeImage();
         int coreNumber = Runtime.getRuntime().availableProcessors();
         new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
         fractal.saveFileAsJpg(fractal.getImage());
@@ -56,7 +48,6 @@ private Fractal fractal;
             case "mandel" :
                 return new Mandelbrot(fractal);
             case "julia" :
-                System.out.println("Julia ! ");
                 return new Julia(fractal);
             default: return new Mandelbrot(fractal);
         }
@@ -80,7 +71,6 @@ private Fractal fractal;
     }
 
     public void switchDirection(String direction,Fractal fractal) throws IOException {
-
         switch (direction) {
             case "up" :
                 this.fractal.setPosY(this.fractal.getPosY()-pas);
@@ -117,6 +107,7 @@ private Fractal fractal;
     }
 
     public static void main(String[] args) {
+        //write in file
 //        try {
 //            int horizontalSide = 1000;
 //            int verticalSide = 1000;
@@ -133,13 +124,15 @@ private Fractal fractal;
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
+        //write in console
+
         FractalController controller = new FractalController();
         int runs = 10;
-
         long elapsed = 0;
+
         System.out.println("with threading");
         Mandelbrot fractal = new Mandelbrot();
-        fractal.makeImage();
         long start = System.currentTimeMillis();
         for (int i = 0; i < runs; i++) {
             new FractalDesigner(fractal, Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())).designFractal();
@@ -160,8 +153,7 @@ private Fractal fractal;
 //
 //        System.out.println("average without threading "+(elapsed/runs));
 
-
-        System.out.println("Stats OK");
+        System.out.println("Stats Finished");
     }
 
     /**
@@ -174,7 +166,6 @@ private Fractal fractal;
         for (int i = 0; i < runs; i++) {
             long start = System.currentTimeMillis();
             Mandelbrot mandelbrot = new Mandelbrot(verticalSide,horizontalSide, zoom, posX, posY); // initialize at -250 and then user moves
-            mandelbrot.makeImage();
             if (withThreading) {
                 new FractalDesigner(mandelbrot, Executors.newFixedThreadPool(coreNumber)).designFractal();
             } else {
