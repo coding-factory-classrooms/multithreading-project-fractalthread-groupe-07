@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="project-template-spark:test" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="org.example" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+<<<<<<< Updated upstream
+<module external.system.module.type="sourceSet" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager">
     <output-test url="file://$MODULE_DIR$/../../build/classes/java/test" />
     <exclude-output />
@@ -34,5 +35,12 @@
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-util:9.4.31.v20200723" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-client:9.4.31.v20200723" level="project" />
   </component>
+=======
+<module version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
   <component name="TestModuleProperties" production-module="project-template-spark.main" />
+>>>>>>> Stashed changes
 </module>
