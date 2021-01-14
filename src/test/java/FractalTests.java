@@ -1,11 +1,21 @@
+import org.example.Fractal;
+import org.example.FractalController;
+import org.example.Mandelbrot;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class FractalTests {
     @Test
     public void test_should_return_mandelbrot() {
-        // SUCH WOW!
-        Assert.assertEquals(4, 2 + 2);
+        // GIVEN //
+        String type = "mandel";
+        Mandelbrot mandelbrot = new Mandelbrot();
+        FractalController fractalController = new FractalController();
+        // WHEN //
+        Fractal fractal = fractalController.fractalFactory(type,mandelbrot);
+
+        // THEN //
+        Assert.assertEquals(fractal.getName(), "mandel");
     }
     @Test
     public void test_should_return_julia() {
