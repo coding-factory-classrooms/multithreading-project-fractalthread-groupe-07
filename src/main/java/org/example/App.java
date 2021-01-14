@@ -9,8 +9,7 @@ public class App {
     public static void main(String[] args) {
         initialize();
 
-        int verticalSide = 1000;
-        int horizontalSide = 1000;
+
         FractalController fractalController = new FractalController();
 
         Spark.get("/", (req, res) -> fractalController.fractalControllerInitialise());

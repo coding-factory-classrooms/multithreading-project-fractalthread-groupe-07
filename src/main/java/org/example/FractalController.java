@@ -5,7 +5,6 @@ import org.example.core.Template;
 import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -22,7 +21,7 @@ public class FractalController {
 */
 private Fractal fractal;
 
-    public static LRUCache<Integer, BufferedImage> cache = new LRUCache<>(20);
+    public static LRUCache<Integer, BufferedImage> cache = new LRUCache<>(50);
 
     public String fractalControllerInitialise() {
         try {
@@ -47,14 +46,15 @@ private Fractal fractal;
     }
 
     private static void RenderImage(Fractal fractal) throws IOException {
-        /*BufferedImage bfImage;
         if (cache.containValue(fractal.getImage())) {
-            bfImage = fractal.getImage();
-
-        }*/
-        fractal.makeImage();
-        int coreNumber = Runtime.getRuntime().availableProcessors();
-        new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
+            fractal.saveFileAsJpg(fractal.getImage());
+        } else {
+            fractal.makeImage();
+            int coreNumber = Runtime.getRuntime().availableProcessors();
+            new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
+            cache.put(cache.keyEntriesInit() + 1, fractal.getImage());
+            cache.printSequence();
+        }
         fractal.saveFileAsJpg(fractal.getImage());
     }
 
@@ -81,7 +81,7 @@ private Fractal fractal;
         return response;
     }
 
-    public void resize(String verticalSide, String horizontalSide) throws IOException {
+    public void resize(String verticalSide, String horizontalSide) {
         fractal.setVerticalSide(Integer.parseInt(verticalSide));
         fractal.setHorizontalSide(Integer.parseInt(horizontalSide));
     }
