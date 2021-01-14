@@ -75,4 +75,10 @@ fabric.properties
 
 src/main/resources/static/img/mandelbrot.jpg
 
-*.jpg
+src/main/resources/static/img/julia.jpg
+
+src/main/resources/static/img/
+
+*.icloud
+
+.DS_Store

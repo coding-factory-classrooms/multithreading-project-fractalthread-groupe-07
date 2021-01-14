@@ -1,35 +1,79 @@
 package org.example;
-import java.util.LinkedHashMap;
-import java.util.Iterator;
 
-public class LRUCache {
+import java.util.*;
 
-    private int capacity;
-    private LinkedHashMap<Integer,Integer> map;
+public class LRUCache<K, V> {
+
+    private LinkedHashMap<K, V> lruCacheMap;
+    private final int capacity;
+    private final boolean SORT_BY_ACCESS = false;
+    private final float LOAD_FACTOR = 0.75F;
+
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
-        this.map = new LinkedHashMap<>();
+        this.lruCacheMap = new LinkedHashMap<>(capacity, LOAD_FACTOR, SORT_BY_ACCESS);
+        Set entrySet = lruCacheMap.entrySet();
+        Iterator it = entrySet.iterator();
     }
 
-    public int get(int key) {
-        Integer value = this.map.get(key);
+    public int checkIfEmpty(int key) {
+        V value = this.lruCacheMap.get(key);
         if (value == null) {
-            value = -1;
+            return -1;
         } else {
-            this.set(key, value);
+            return 1;
         }
-        return value;
     }
 
-    public void set(int key, int value) {
-        if (this.map.containsKey(key)) {
-            this.map.remove(key);
-        } else if (this.map.size() == this.capacity) {
-            Iterator<Integer> it = this.map.keySet().iterator();
-            it.next();
-            it.remove();
+    public K getKeyByValue(V v) {
+        for (Map.Entry<K, V> entry : lruCacheMap.entrySet()) {
+            if (entry.getValue().equals(v)) {
+                return entry.getKey();
+            }
         }
-        map.put(key, value);
+        return null;
     }
+
+    public V getValue(K k) {
+        for (Map.Entry<K, V> entry : lruCacheMap.entrySet()) {
+            if (entry.getKey().equals(k)) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
+
+    public boolean containValue(V v) {
+        for (Map.Entry<K, V> entry : lruCacheMap.entrySet()) {
+            if (entry.getValue().equals(v)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void put(K k, V v) {
+        if (lruCacheMap.containsKey(k)) {
+            lruCacheMap.remove(k);
+        } else if (lruCacheMap.size() >= capacity) {
+            lruCacheMap.remove(lruCacheMap.keySet().iterator().next());
+        }
+        lruCacheMap.put(k, v);
+    }
+
+    public Integer keyEntriesInit() {
+        int count = 0;
+        if (lruCacheMap != null) {
+            for (Map.Entry<K, V> ignored : lruCacheMap.entrySet()) {
+                count++;
+            }
+            return count;
+        } else {
+            return -1;
+        }
+
+    }
+
+
 }

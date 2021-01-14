@@ -1,18 +1,29 @@
 var isJulia = false;
-function getJulia() {
-    isJulia = true;
-    return fetch("/getImage?direction=none&type=julia")
-    .then(response => response.blob())
-    .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+function getFractal() {
+    if (document.getElementById('chkSwitch').checked)
+    {
+        isJulia = false;
+        document.getElementById('nameFractalTxt').textContent = "Mandelbrot";
+        return fetch("/getImage?direction=none&type=mandel")
+            .then(response => response.blob())
+            .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+    } else {
+        isJulia = true;
+        document.getElementById('nameFractalTxt').textContent = "Julia";
+        return fetch("/getImage?direction=none&type=julia")
+            .then(response => response.blob())
+            .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
+    }
+
 }
 function getImage(direction) {
     if(isJulia) {
-        return fetch('/getImage'+'?direction='+direction+"&type=julia")
+        return fetch('/getImage?direction='+direction+"&type=julia")
         .then(response => response.blob())
             .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
     }
     else {
-        return fetch('/getImage'+'?direction='+direction+"&type=mandel")
+        return fetch('/getImage?direction='+direction+"&type=mandel")
         .then(response => response.blob())
             .then(data => document.getElementById("FractalImage").src=URL.createObjectURL(data));
     }

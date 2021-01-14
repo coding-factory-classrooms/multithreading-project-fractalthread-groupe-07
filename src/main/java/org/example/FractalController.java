@@ -15,6 +15,8 @@ public class FractalController {
     final float pasZoomJulia = 2F;
     private Fractal fractal;
 
+    public static LRUCache<Integer, Fractal> cache = new LRUCache<>(50);
+
     public String fractalControllerInitialise() {
         try {
             fractal = new Mandelbrot();
@@ -38,9 +40,17 @@ public class FractalController {
     }
 
     private static void RenderImage(Fractal fractal) throws IOException {
-        int coreNumber = Runtime.getRuntime().availableProcessors();
-        new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
-        fractal.saveFileAsJpg(fractal.getImage());
+        if (cache.containValue(fractal)) {
+            Integer fractalKey = cache.getKeyByValue(fractal);
+            Fractal fractalCache = cache.getValue(fractalKey);
+            fractal.saveFileAsJpg(fractalCache.getImage());
+        } else {
+            fractal.makeImage();
+            int coreNumber = Runtime.getRuntime().availableProcessors();
+            new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
+            cache.put(cache.keyEntriesInit() + 1, fractal);
+            fractal.saveFileAsJpg(fractal.getImage());
+        }
     }
 
     public Fractal fractalFactory(String name, Fractal fractal) {
@@ -65,7 +75,7 @@ public class FractalController {
         return response;
     }
 
-    public void resize(String verticalSide, String horizontalSide) throws IOException {
+    public void resize(String verticalSide, String horizontalSide) {
         fractal.setVerticalSide(Integer.parseInt(verticalSide));
         fractal.setHorizontalSide(Integer.parseInt(horizontalSide));
     }

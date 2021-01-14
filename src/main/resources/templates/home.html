@@ -1,47 +1,79 @@
 #parse("base.html")
 #@mainLayout()
-<h1>Mendeleiev.bat</h1>
-<div>
-    <div class="row">
-        <img id="FractalImage" src="img/mandelbrot.jpg" />
+<div id="mainBody">
+    <div style="margin-top: 75px;">
+        <div class="col-12" style="text-align: center;">
+            <h4 style="font-weight:bold;">
+                To see the easterEgg, just go down one time ! (posX = 2000; posY = -2600)
+            </h4>
+        </div>
+        <div class="row">
+            <img id="FractalImage" src="img/mandelbrot.jpg" />
+        </div>
     </div>
+
     <div class="block">
-        <div class=row>
-            <button id="top" value="up" onclick="getImage(this.value)" class="btn btn-primary solo">Haut</button>
-        </div>
+        <div class="direction">
+            <div class="row">
+                <div class="set col-6">
+                    <nav class="d-pad col-5">
+                        <a class="up" id="top" value="up" onclick="getImage('up')"></a>
+                        <a class="right" id="right" value="right" onclick="getImage('right')"></a>
+                        <a class="down" id="down" value="down" onclick="getImage('down')"></a>
+                        <a class="left" id="left " value="left" onclick="return getImage('left');"></a>
+                    </nav>
+                </div>
 
-        <div class="row">
-            <div class="col-4">
-                <p style="font-weight:990">
-                    To see the easterEgg, just go down one time ! (posX = 2000; posY = -2600)
-                </p>
+
+                <div class="col-6" style="padding-left: 50px;">
+                    <div class="col-1">
+                        <button id="zoom" class="btnZoom btn btn-success btn-circle btn-xl glyphicon glyphicon-plus" value="zoom" onclick="getImage(this.value)">+</button>
+                        <button id="unzoom" class="btnZoom btn btn-success btn-circle btn-xl glyphicon glyphicon-minus" value="unzoom" onclick="getImage(this.value)">-</button>
+                    </div>
+                </div>
             </div>
-            <button id="left " value="left" onclick="getImage(this.value)" class="btn btn-primary gauche">Gauche</button>
-            <button id="unzoom" value="unzoom" onclick="getImage(this.value)" class="btn btn-primary">Unzoom</button>
-            <button id="zoom" value="zoom" onclick="getImage(this.value)" class="btn btn-primary">Zoom</button>
-            <button id="right" value="right" onclick="getImage(this.value)" class="btn btn-primary droite">Droite</button>
-            <div class="col-4"></div>
         </div>
-        <div class="row">
-            <button id="down" value="down" onclick="getImage(this.value)" class="btn btn-primary solo">Bas</button>
-        </div>
-        <div class="row">
-            <button id="juliaBtn" onclick="getJulia()" class="btn btn-primary solo">Julia !</button>
-        </div>
-        <div>
 
-            <form style="text-align: center" method="GET" action="javascript:setSides()">
-                <label for="vertical">Vertical:</label>
-                <input type="text" id="vertical" name="verticalSide" required
-                       minlength="0" maxlength="8" size="10">
-                <label for="vertical">Horizontal:</label>
-                <input type="text" id="horizontal" name=horizontalSide" required
-                       minlength="0" maxlength="8" size="10">
-                <br/>
-                <button type="submit" class="btn btn-primary">Redimensionner</button>
-            </form>
+        <div id="menuToggle" class="row">
+
+            <div id="menu" class="row">
+                <div id="blockSwitch" class="col-4">
+                    <div class="col-2"></div>
+                    <div id="rowSwitch">
+                        <label class="switch">
+                            <input id="chkSwitch" type="checkbox" onclick="getFractal()" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <h5 id="nameFractalTxt">Mandelbrot</h5>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+                <div id="blockSize" class="col-5">
+
+                    <form style="text-align: center" method="GET" action="javascript:setSides()">
+                        <div class="row">
+                            <label for="vertical">Vertical:</label>
+                            <input type="text" id="vertical" name="verticalSide" required
+                                   minlength="0" maxlength="8" size="10">
+                            <label for="vertical">Horizontal:</label>
+                            <input type="text" id="horizontal" name=horizontalSide" required
+                                   minlength="0" maxlength="8" size="10">
+                            <button type="submit" class="btn btn-primary">CROP IT !</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!--
+            Too bad the menu has to be inside of the button
+            but hey, it's pure CSS magic.
+            -->
+
         </div>
+
     </div>
+
     <script src="/js/javascript.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </div>
 #end

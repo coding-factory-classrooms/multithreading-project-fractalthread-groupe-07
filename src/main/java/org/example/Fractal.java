@@ -24,6 +24,16 @@ public abstract class Fractal extends JFrame {
         this.image = new BufferedImage(horizontalSide, verticalSide, BufferedImage.TYPE_INT_RGB);
     }
 
+    public boolean equals(Object fractalObject) {
+        Fractal fractal = (Fractal) fractalObject;
+        return (this.verticalSide == fractal.getVerticalSide()
+                && this.horizontalSide == fractal.getHorizontalSide()
+                && this.imagePath.equals(fractal.getImagePath())
+                && this.posX == fractal.getPosX()
+                && this.posY == fractal.getPosY()
+                && this.zoom == fractal.getZoom());
+    }
+
     public byte[] getFractalFromBuffer() throws IOException {
         BufferedImage originalImage = ImageIO.read(new File(this.imagePath));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
