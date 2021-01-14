@@ -19,8 +19,15 @@ public class FractalTests {
     }
     @Test
     public void test_should_return_julia() {
-        // SUCH WOW!
-        Assert.assertEquals(4, 2 + 2);
+        // GIVEN //
+        String type = "julia";
+        Mandelbrot mandelbrot = new Mandelbrot();
+        FractalController fractalController = new FractalController();
+        // WHEN //
+        Fractal fractal = fractalController.fractalFactory(type,mandelbrot);
+
+        // THEN //
+        Assert.assertEquals(fractal.getName(), "julia");
     }
     @Test
     public void test_should_save_and_retrieve_img() {
