@@ -42,10 +42,10 @@ public class Julia extends Fractal
         BufferedImage img = new BufferedImage((int)WIDTH, (int)HEIGHT,BufferedImage.TYPE_3BYTE_BGR);
 
         // Getting the constant ComplexNumber as input from the user for use in the function f(z) = z + c
-        out.print("Re(c): -0.62772"); //-0.835 -0.2321 is cool too
-        double cReal = -0.62772;  // cuz its stylé
-        out.print("Im(c): 0.42193i");
-        double cImag = 0.42193;
+        out.print("Re(c): -0.835"); //0.62772 -0.42193i is cool too
+        double cReal = -0.835;  // cuz its stylé
+        out.print("Im(c): 0.2321");
+        double cImag = -0.2321;
 
         // Creating the constant complex number from input real and imaginary values
         ComplexNumber constant = new ComplexNumber(cReal,cImag);
@@ -53,7 +53,7 @@ public class Julia extends Fractal
         // Setting the maximum iterations to 256. This can be increased if you suspect an escapee set may be found beyond this value.
         // Increasing or decreasing the value will affect computation time.
 
-        int max_iter = 256;
+        int max_iter = 500;
 
         // Looping through every pixel of image
         for(int X=0; X<WIDTH; X++)
