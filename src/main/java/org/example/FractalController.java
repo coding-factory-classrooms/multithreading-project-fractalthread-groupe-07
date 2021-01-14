@@ -101,14 +101,16 @@ public class FractalController {
                 this.fractal.setZoom(this.fractal.getZoom()+pas);
                 break;
             case "unzoom" :
-                if (this.fractal.getZoom()-pas < 0) {
+                if (this.fractal.getZoom()-pas < 0 && this.fractal.getName().equals("mandel")) {
                     break;
                 } else {
                     if (this.fractal.getName().equals("julia")) {
                         this.fractal.setZoom(this.fractal.getZoom()*pasZoomJulia);
                         break;
                     }
-                    this.fractal.setZoom(this.fractal.getZoom()-pas);
+                    else {
+                        this.fractal.setZoom(this.fractal.getZoom()-pas);
+                    }
                 }
                 break;
         }
