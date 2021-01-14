@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 
 public class FractalController {
     final int pas = 100;
-    final float pasZoomJulia = 2F;
     private Fractal fractal;
 
     public static LRUCache<Integer, Fractal> cache = new LRUCache<>(50);
@@ -95,7 +94,7 @@ public class FractalController {
                 break;
             case "zoom" :
                 if (this.fractal.getName().equals("julia")) {
-                    this.fractal.setZoom(this.fractal.getZoom()/pasZoomJulia);
+                    this.fractal.setZoom(this.fractal.getZoom()-pas);
                     break;
                 }
                 this.fractal.setZoom(this.fractal.getZoom()+pas);
@@ -105,7 +104,7 @@ public class FractalController {
                     break;
                 } else {
                     if (this.fractal.getName().equals("julia")) {
-                        this.fractal.setZoom(this.fractal.getZoom()*pasZoomJulia);
+                        this.fractal.setZoom(this.fractal.getZoom()+pas);
                         break;
                     }
                     else {
@@ -114,6 +113,7 @@ public class FractalController {
                 }
                 break;
         }
+        System.out.println(fractal.getZoom());
         RenderImage(fractal);
     }
 
