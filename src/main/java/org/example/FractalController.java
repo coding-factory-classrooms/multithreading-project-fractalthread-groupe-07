@@ -221,4 +221,11 @@ public class FractalController {
             e.printStackTrace();
         }
     }
+    public void setFractal(Fractal fractal) {
+        this.fractal = fractal;
+    }
+
+    public Fractal getFractal() {
+        return fractal;
+    }
 }
