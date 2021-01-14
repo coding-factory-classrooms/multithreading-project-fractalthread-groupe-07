@@ -12,13 +12,14 @@ import java.util.concurrent.Executors;
 public class FractalController {
     final int pas = 100;
     final float pasZoomJulia = 2F;
-/*
-    double zoom = 5800; //200
-    int posX = 2000; //400
-    int posY = -2600; //-400
-    private int verticalSide;
-    private int horizontalSide;
-*/
+
+    /*
+            double zoom = 5800; //200
+            int posX = 2000; //400
+            int posY = -2600; //-400
+            private int verticalSide;
+            private int horizontalSide;
+        */
 private Fractal fractal;
 
     public static LRUCache<Integer, BufferedImage> cache = new LRUCache<>(50);
@@ -212,5 +213,12 @@ private Fractal fractal;
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void setFractal(Fractal fractal) {
+        this.fractal = fractal;
+    }
+
+    public Fractal getFractal() {
+        return fractal;
     }
 }
