@@ -45,7 +45,6 @@ public class FractalController {
             Fractal fractalCache = cache.getValue(fractalKey);
             fractal.saveFileAsJpg(fractalCache.getImage());
         } else {
-            fractal.makeImage();
             int coreNumber = Runtime.getRuntime().availableProcessors();
             new FractalDesigner(fractal, Executors.newFixedThreadPool(coreNumber)).designFractal();
             cache.put(cache.keyEntriesInit() + 1, fractal);
